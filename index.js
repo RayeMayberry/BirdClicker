@@ -13,24 +13,33 @@ root.innerHTML = `
         <span id="birdsCount"></span>
         <span id="birdfeed"></span>
     </div>
-    <div id="gameMessages" class="column">
+    <div id="messages" class="column">
     </div>
 `;
 var birdsCount = document.querySelector("#birdsCount");
 var seedCount = document.querySelector("#seedCount");
-var gameMessages = document.querySelector("#gameMessages");
+// write messages for the player
+var messages = document.querySelector("#messages");
+function newMessage(text){
+    messages.innerHTML += `<span>${text}</span>`;
+}
 
 //basic clicker
 var addBirds = function addBirds(event) {
-    birds++;
-    seed -= 10;
-    birdsCount.innerHTML = `Birds in garden: ${birds}`;
-    seedCount.innerHTML = `Birdseed: ${seed}`;
-    gameMessages.innerHTML += `<span>-10 birdseed</span>`;
-    gameMessages.innerHTML += `<span>A bird landed in the garden!</span>`;
+    if(seed > 0) {
+        birds++;
+        seed -= 10;
+        birdsCount.innerHTML = `Birds in garden: ${birds}`;
+        seedCount.innerHTML = `Birdseed: ${seed}`;
+        newMessage("A bird landed in the garden!")
+        newMessage("-10 birdseed");
+    } else {
+        newMessage("Not enough birdseed");
+    }
 }
-function feedBirdsButton() {
+function feedBirdsButton(){
     var feedBirds = document.querySelector(`#feedBirds`);
     feedBirds.addEventListener("click", addBirds);
+    
 };
 feedBirdsButton();

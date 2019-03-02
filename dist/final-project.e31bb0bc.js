@@ -110,18 +110,28 @@ var seed = 100;
 var trinkets = 0; //rendering HTML content
 
 var root = document.querySelector("#root");
-root.innerHTML = "\n    <div id=\"resources\" class=\"column\">\n        <span id=\"seedCount\">Birdseed: ".concat(seed, "</span>\n        <span id=\"feedBirds\" class=\"button\">Click to feed birds</span>\n    </div>\n    <div id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </div>\n    <div id=\"gameMessages\" class=\"column\">\n    </div>\n");
+root.innerHTML = "\n    <div id=\"resources\" class=\"column\">\n        <span id=\"seedCount\">Birdseed: ".concat(seed, "</span>\n        <span id=\"feedBirds\" class=\"button\">Click to feed birds</span>\n    </div>\n    <div id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </div>\n    <div id=\"messages\" class=\"column\">\n    </div>\n");
 var birdsCount = document.querySelector("#birdsCount");
-var seedCount = document.querySelector("#seedCount");
-var gameMessages = document.querySelector("#gameMessages"); //basic clicker
+var seedCount = document.querySelector("#seedCount"); // write messages for the player
+
+var messages = document.querySelector("#messages");
+
+function newMessage(text) {
+  messages.innerHTML += "<span>".concat(text, "</span>");
+} //basic clicker
+
 
 var addBirds = function addBirds(event) {
-  birds++;
-  seed -= 10;
-  birdsCount.innerHTML = "Birds in garden: ".concat(birds);
-  seedCount.innerHTML = "Birdseed: ".concat(seed);
-  gameMessages.innerHTML += "<span>-10 birdseed</span>";
-  gameMessages.innerHTML += "<span>A bird landed in the garden!</span>";
+  if (seed > 0) {
+    birds++;
+    seed -= 10;
+    birdsCount.innerHTML = "Birds in garden: ".concat(birds);
+    seedCount.innerHTML = "Birdseed: ".concat(seed);
+    newMessage("A bird landed in the garden!");
+    newMessage("-10 birdseed");
+  } else {
+    newMessage("Not enough birdseed");
+  }
 };
 
 function feedBirdsButton() {
