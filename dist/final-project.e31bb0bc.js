@@ -105,15 +105,23 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-var birdCount = 0; //rendering HTML content
+var birds = 0;
+var seed = 100;
+var trinkets = 0; //rendering HTML content
 
 var root = document.querySelector("#root");
-root.innerHTML = "\n    <div id=\"iterators\">\n        <input id=\"feedBirds\" type=\"button\" value=\"Click to feed birds\">\n    </div>\n    <div id=\"trackers\">\n        <p id=\"birdCount\"></p>\n    </div>\n    <div id=\"gameMessages\">\n    </div>\n";
-var birdCountDisplay = document.querySelector("#birdCount"); //basic clicker
+root.innerHTML = "\n    <div id=\"resources\" class=\"column\">\n        <span id=\"seedCount\">Birdseed: ".concat(seed, "</span>\n        <span id=\"feedBirds\" class=\"button\">Click to feed birds</span>\n    </div>\n    <div id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </div>\n    <div id=\"gameMessages\" class=\"column\">\n    </div>\n");
+var birdsCount = document.querySelector("#birdsCount");
+var seedCount = document.querySelector("#seedCount");
+var gameMessages = document.querySelector("#gameMessages"); //basic clicker
 
 var addBirds = function addBirds(event) {
-  birdCount++;
-  birdCountDisplay.innerHTML = "Birds in garden: ".concat(birdCount);
+  birds++;
+  seed -= 10;
+  birdsCount.innerHTML = "Birds in garden: ".concat(birds);
+  seedCount.innerHTML = "Birdseed: ".concat(seed);
+  gameMessages.innerHTML += "<span>-10 birdseed</span>";
+  gameMessages.innerHTML += "<span>A bird landed in the garden!</span>";
 };
 
 function feedBirdsButton() {
