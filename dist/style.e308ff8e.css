@@ -1,4 +1,9 @@
+body {
+    background-color: thistle;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 #root {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }

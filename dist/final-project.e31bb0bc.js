@@ -105,15 +105,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-//rendering HTML content
-var root = document.querySelector("#root");
-root.innerHTML = "<input id=\"feedBirds\" type=\"button\" value=\"Click to feed birds\">"; // handling button functionalities
+var birdCount = 0; //rendering HTML content
 
-var birdCount = 0;
+var root = document.querySelector("#root");
+root.innerHTML = "\n    <div id=\"iterators\">\n        <input id=\"feedBirds\" type=\"button\" value=\"Click to feed birds\">\n    </div>\n    <div id=\"trackers\">\n        <p id=\"birdCount\"></p>\n    </div>\n    <div id=\"gameMessages\">\n    </div>\n";
+var birdCountDisplay = document.querySelector("#birdCount"); //basic clicker
 
 var addBirds = function addBirds(event) {
   birdCount++;
-  console.log(birdCount);
+  birdCountDisplay.innerHTML = "Birds in garden: ".concat(birdCount);
 };
 
 function feedBirdsButton() {
@@ -123,7 +123,7 @@ function feedBirdsButton() {
 
 ;
 feedBirdsButton();
-},{}],"../../../AppData/Roaming/npm-cache/_npx/4536/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../AppData/Roaming/npm-cache/_npx/12752/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -150,7 +150,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59119" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62315" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -292,5 +292,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/4536/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/12752/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/final-project.e31bb0bc.map
