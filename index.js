@@ -35,6 +35,8 @@ var addBirds = function addBirds(event) {
         newMessage("-10 birdseed");
     } else {
         newMessage("Not enough birdseed");
+        var element = event.target;
+        element.style.backgroundColor = "lightgrey";
     }
 }
 function feedBirdsButton(){

@@ -14,8 +14,15 @@ body {
     align-content: flex-start;
 }
 
+#messages {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: 100vh;
+    overflow-y: auto;
+}
+
 .button {
-    background-color: gray;
+    background-color: grey;
 }
 
 #birdsCount{
