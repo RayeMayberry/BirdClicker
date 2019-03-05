@@ -1,6 +1,7 @@
 body {
     background-color: thistle;
     font-family: 'Courier New', Courier, monospace;
+    font-size: 14pt;
 }
 
 #root {
@@ -12,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
+    
 }
 
 #messages {
@@ -23,6 +25,9 @@ body {
 
 .button {
     background-color: grey;
+}
+.button:hover{
+    cursor: pointer;
 }
 
 #birdsCount{

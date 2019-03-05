@@ -110,25 +110,29 @@ var seed = 100;
 var trinkets = 0; //rendering HTML content
 
 var root = document.querySelector("#root");
-root.innerHTML = "\n    <div id=\"resources\" class=\"column\">\n        <span id=\"seedCount\">Birdseed: ".concat(seed, "</span>\n        <span id=\"feedBirds\" class=\"button\">Click to feed birds</span>\n    </div>\n    <div id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </div>\n    <div id=\"messages\" class=\"column\">\n    </div>\n");
-var birdsCount = document.querySelector("#birdsCount");
-var seedCount = document.querySelector("#seedCount"); // write messages for the player
+root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: ".concat(trinkets, "</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Birdseed: ").concat(seed, "</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n"); // txt displays of resource stats
 
-var messages = document.querySelector("#messages");
+var birdsCount = document.querySelector("#birdsCount");
+var seedCount = document.querySelector("#seedCount");
+var trinketsCount = document.querySelector("#trinketsCount"); // write messages for the player
 
 function newMessage(text) {
+  var messages = document.querySelector("#messages");
   messages.innerHTML += "<span>".concat(text, "</span>");
 } //basic clicker
 
 
 var addBirds = function addBirds(event) {
-  if (seed > 0) {
+  if (seed >= 10) {
     birds++;
     seed -= 10;
+    trinkets++;
     birdsCount.innerHTML = "Birds in garden: ".concat(birds);
     seedCount.innerHTML = "Birdseed: ".concat(seed);
+    trinketsCount.innerHTML = "Trinkets: ".concat(trinkets);
     newMessage("A bird landed in the garden!");
     newMessage("-10 birdseed");
+    newMessage("A bird left you 1 trinket!");
   } else {
     newMessage("Not enough birdseed");
     var element = event.target;
