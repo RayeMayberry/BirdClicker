@@ -105,16 +105,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-var birds = 0;
-var seed = 100;
-var trinkets = 0; //rendering HTML content
-
+//rendering HTML content
 var root = document.querySelector("#root");
-root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: ".concat(trinkets, "</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Birdseed: ").concat(seed, "</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <span id=\"birdsCount\"></span>\n        <span id=\"birdfeed\"></span>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n"); // txt displays of resource stats
-
-var birdsCount = document.querySelector("#birdsCount");
-var seedCount = document.querySelector("#seedCount");
-var trinketsCount = document.querySelector("#trinketsCount"); // write messages for the player
+root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\"></span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Seed: </span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <li>\n            <span id=\"birdsCount\"></span>\n        </li>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n";
+var birds = {
+  number: 0,
+  counter: document.querySelector("#birdsCount")
+};
+var seed = {
+  number: 100,
+  counter: document.querySelector("#seedCount")
+};
+var trinkets = {
+  number: 0,
+  counter: document.querySelector("#trinketsCount")
+}; // write messages for the player
 
 function newMessage(text) {
   var messages = document.querySelector("#messages");
@@ -123,13 +128,13 @@ function newMessage(text) {
 
 
 var addBirds = function addBirds(event) {
-  if (seed >= 10) {
-    birds++;
-    seed -= 10;
-    trinkets++;
-    birdsCount.innerHTML = "Birds in garden: ".concat(birds);
-    seedCount.innerHTML = "Birdseed: ".concat(seed);
-    trinketsCount.innerHTML = "Trinkets: ".concat(trinkets);
+  if (seed.number >= 10) {
+    birds.number++;
+    seed.number -= 10;
+    trinkets.number++;
+    birds.counter.innerHTML = "Birds in Garden: ".concat(birds.number);
+    seed.counter.innerHTML = "Seed: ".concat(seed.number);
+    trinkets.counter.innerHTML = "Trinkets: ".concat(trinkets.number);
     newMessage("A bird landed in the garden!");
     newMessage("-10 birdseed");
     newMessage("A bird left you 1 trinket!");
@@ -147,7 +152,26 @@ function feedBirdsButton() {
 
 ;
 feedBirdsButton();
-},{}],"../../../AppData/Roaming/npm-cache/_npx/12752/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+var addSeed = function addSeed(event) {
+  if (trinkets.number >= 1) {
+    trinkets.number--;
+    seed.number += 10;
+    trinkets.counter.innerHTML = "Trinkets: ".concat(trinkets.number);
+    seed.counter.innerHTML = "Seed: ".concat(seed.number);
+  } else {
+    newMessage("Not enough trinkets");
+  }
+};
+
+function buySeedButton() {
+  var buySeed = document.querySelector("#buySeed");
+  buySeed.addEventListener("click", addSeed);
+}
+
+;
+buySeedButton();
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -174,7 +198,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55681" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -316,5 +340,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../AppData/Roaming/npm-cache/_npx/12752/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/final-project.e31bb0bc.map
