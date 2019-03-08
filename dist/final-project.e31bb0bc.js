@@ -105,8 +105,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-//rendering HTML content
-var root = document.querySelector("#root");
+// rendering HTML content
+var root = document.querySelector('#root');
 root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: 0</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Seed: 0</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <li>\n            <span id=\"birdsCount\">Birds in garden: 0</span>\n        </li>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n";
 
 function addResource(resource, interval) {
@@ -121,25 +121,25 @@ function spendResource(resource, interval) {
 
 
 var birds = {
-  name: "Birds in Garden",
-  number: 0,
-  counter: document.querySelector("#birdsCount")
+  'name': 'Birds in Garden',
+  'number': 0,
+  'counter': document.querySelector('#birdsCount')
 };
 var seed = {
-  name: "Birdseed",
-  number: 100,
-  counter: document.querySelector("#seedCount")
+  'name': 'Birdseed',
+  'number': 100,
+  'counter': document.querySelector('#seedCount')
 };
 var trinkets = {
-  name: "Trinkets",
-  number: 0,
-  counter: document.querySelector("#trinketsCount")
+  'name': 'Trinkets',
+  'number': 0,
+  'counter': document.querySelector('#trinketsCount')
 }; // write messages for the player
 
 function newMessage(text) {
-  var messages = document.querySelector("#messages");
+  var messages = document.querySelector('#messages');
   messages.innerHTML += "<span>".concat(text, "</span>");
-} //basic clicker
+} // basic clicker
 
 
 var addBirds = function addBirds(event) {
@@ -147,22 +147,21 @@ var addBirds = function addBirds(event) {
     addResource(birds, 1);
     spendResource(seed, 10);
     addResource(trinkets, 1);
-    newMessage("A bird landed in the garden!");
-    newMessage("-10 birdseed");
-    newMessage("A bird left you 1 trinket!");
+    newMessage('A bird landed in the garden!');
+    newMessage('-10 birdseed');
+    newMessage('A bird left you 1 trinket!');
   } else {
-    newMessage("Not enough birdseed");
+    newMessage('Not enough birdseed');
     var element = event.target;
-    element.style.backgroundColor = "lightgrey";
+    element.style.backgroundColor = 'lightgrey';
   }
 };
 
 function feedBirdsButton() {
-  var feedBirds = document.querySelector("#feedBirds");
-  feedBirds.addEventListener("click", addBirds);
+  var feedBirds = document.querySelector('#feedBirds');
+  feedBirds.addEventListener('click', addBirds);
 }
 
-;
 feedBirdsButton();
 
 var addSeed = function addSeed(event) {
@@ -172,16 +171,15 @@ var addSeed = function addSeed(event) {
     trinkets.counter.innerHTML = "Trinkets: ".concat(trinkets.number);
     seed.counter.innerHTML = "Seed: ".concat(seed.number);
   } else {
-    newMessage("Not enough trinkets");
+    newMessage('Not enough trinkets');
   }
 };
 
 function buySeedButton() {
-  var buySeed = document.querySelector("#buySeed");
-  buySeed.addEventListener("click", addSeed);
+  var buySeed = document.querySelector('#buySeed');
+  buySeed.addEventListener('click', addSeed);
 }
 
-;
 buySeedButton();
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -210,7 +208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55681" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59725" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
