@@ -1,25 +1,27 @@
+var birds = {
+    'name': 'Birds in Garden',
+    'number': 0,
+    'counter': '<span id="birdsCount">Birds: 0</span>'
+};
+var seed = {
+    'name': 'Birdseed',
+    'number': 100,
+    'counter': '<span id="seedCount">Birdseed: 0</span>'
+};
+var trinkets = {
+    'name': 'Trinkets',
+    'number': 0,
+    'counter': '<span id="trinketsCount">Trinkets: 0</span>'
+};
 // rendering HTML content
 var root = document.querySelector('#root');
 
 root.innerHTML = `
-    <ul id="resources" class="column">
-        <li>
-            <span id="trinketsCount">Trinkets: 0</span>
-        </li>
-        <li>
-            <span id="seedCount">Seed: 0</span>
-            <span id="feedBirds" class="button">Feed (x10)</span>
-            <span id="buySeed" class="button">Buy</span>
-        </li>
-    </ul>
-    <ul id="stats" class="column">
-        <li>
-            <span id="birdsCount">Birds in garden: 0</span>
-        </li>
-    </ul>
-    <div id="messages" class="column">
-    </ul>
+	  ${birds.counter}
+    ${seed.counter}
+    ${trinkets.counter}
 `;
+
 
 function addResource(resource, interval){
     resource.number += interval;
@@ -29,22 +31,6 @@ function spendResource(resource, interval){
     resource.number -= interval;
     resource.counter.innerHTML = `${resource.name}: ${resource.number}`;
 }
-
-// stats & resources represented as objects for organization's sake
-var birds = {
-    'name': 'Birds in Garden',
-    'number': 0,
-    'counter': document.querySelector('#birdsCount') };
-var seed = {
-    'name': 'Birdseed',
-    'number': 100,
-    'counter': document.querySelector('#seedCount')
-};
-var trinkets = {
-    'name': 'Trinkets',
-    'number': 0,
-    'counter': document.querySelector('#trinketsCount')
-};
 
 // write messages for the player
 function newMessage(text){

@@ -107,18 +107,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"index.js":[function(require,module,exports) {
 // rendering HTML content
 var root = document.querySelector('#root');
-root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: 0</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Seed: 0</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <li>\n            <span id=\"birdsCount\">Birds in garden: 0</span>\n        </li>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n";
-
-function addResource(resource, interval) {
-  resource.number += interval;
-  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
-}
-
-function spendResource(resource, interval) {
-  resource.number -= interval;
-  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
-} // stats & resources represented as objects for organization's sake
-
+root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: 0</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Seed: 0</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <li>\n            <span id=\"birdsCount\">Birds in garden: 0</span>\n        </li>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n"; // stats & resources represented as objects for organization's sake
 
 var birds = {
   'name': 'Birds in Garden',
@@ -134,7 +123,18 @@ var trinkets = {
   'name': 'Trinkets',
   'number': 0,
   'counter': document.querySelector('#trinketsCount')
-}; // write messages for the player
+};
+
+function addResource(resource, interval) {
+  resource.number += interval;
+  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
+}
+
+function spendResource(resource, interval) {
+  resource.number -= interval;
+  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
+} // write messages for the player
+
 
 function newMessage(text) {
   var messages = document.querySelector('#messages');
