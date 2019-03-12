@@ -16,8 +16,9 @@ var trinkets = {
 // rendering HTML content
 var root = document.querySelector('#root');
 
+// rendering html into the page
 root.innerHTML = `
-	  ${birds.counter}
+	${birds.counter}
     ${seed.counter}
     ${trinkets.counter}
 `;
@@ -40,7 +41,9 @@ function newMessage(text){
 }
 
 // basic clicker
-var addBirds = function addBirds(event){
+function addBirds(event){
+    var element = event.target;
+
     if(seed.number >= 10){
         addResource(birds, 1);
         spendResource(seed, 10);
@@ -51,12 +54,11 @@ var addBirds = function addBirds(event){
     }
     else{
         newMessage('Not enough birdseed');
-        var element = event.target;
-
         element.style.backgroundColor = 'lightgrey';
     }
-};
+}
 
+// change this function so that birds leave trinkets but dont stay in garden
 function feedBirdsButton(){
     var feedBirds = document.querySelector('#feedBirds');
 
@@ -64,7 +66,9 @@ function feedBirdsButton(){
 }
 feedBirdsButton();
 
-var addSeed = function addSeed(event){
+function addSeed(event){
+    var element = event.target;
+
     if(trinkets.number >= 1){
         trinkets.number --;
         seed.number += 10;
@@ -73,8 +77,9 @@ var addSeed = function addSeed(event){
     }
     else{
         newMessage('Not enough trinkets');
+        element.style.backgroundColor = 'lightgrey';
     }
-};
+}
 
 function buySeedButton(){
     var buySeed = document.querySelector('#buySeed');

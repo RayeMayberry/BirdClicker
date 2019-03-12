@@ -1,0 +1,1 @@
+This is a simple clicker game about feeding birds, created for Savvy Coders final Capstone project.
