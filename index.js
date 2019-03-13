@@ -1,26 +1,63 @@
-var birds = {
-    'name': 'Birds in Garden',
-    'number': 0,
-    'counter': '<span id="birdsCount">Birds: 0</span>'
-};
-var seed = {
-    'name': 'Birdseed',
-    'number': 100,
-    'counter': '<span id="seedCount">Birdseed: 0</span>'
-};
-var trinkets = {
-    'name': 'Trinkets',
-    'number': 0,
-    'counter': '<span id="trinketsCount">Trinkets: 0</span>'
-};
-// rendering HTML content
+
 var root = document.querySelector('#root');
 
-// rendering html into the page
+var Resources = [
+    {
+        'name': 'Birds in Garden',
+        'number': 0
+    },
+    {
+        'name': 'Birdseed',
+        'number': 100
+    },
+    {
+        'name': 'Trinkets',
+        'number': 0
+    }
+];
+var Clickers = [
+    {
+        'name': 'Click to feed birds!',
+        'cost': 10,
+        'cost-units': 'trinkets'
+    }
+];
+
+// component functions
+function Header(){
+    return `
+        <header>Bird Clicker: an Iterative Game</header>
+    `;
+}
+function Counters(resources){
+    var output = '<div id="resources" class="column">';
+
+    resources.map((resource) => output += `<span>${resource.name}: ${resource.number}</span>`);
+    output += '</div>';
+
+    return output;
+}
+function Buttons(clickers){
+    // same as Counters but for clickers in lieu of resources
+    var output = '<div id="clickers" class="column">';
+
+    clickers.map((clicker) => output += `<span class="button">${clicker.name}</span>`);
+
+    output += '</div>';
+    
+    return output;
+}
+function Messages(){
+    return '<div id="messages"></div>';
+}
+
+// rendering HTML content
+
 root.innerHTML = `
-	${birds.counter}
-    ${seed.counter}
-    ${trinkets.counter}
+    ${Header()}
+    ${Counters(Resources)}
+    ${Buttons(Clickers)}
+    ${Messages()}
 `;
 
 
@@ -33,12 +70,6 @@ function spendResource(resource, interval){
     resource.counter.innerHTML = `${resource.name}: ${resource.number}`;
 }
 
-// write messages for the player
-function newMessage(text){
-    var messages = document.querySelector('#messages');
-
-    messages.innerHTML += `<span>${text}</span>`;
-}
 
 // basic clicker
 function addBirds(event){
@@ -70,7 +101,7 @@ function addSeed(event){
     var element = event.target;
 
     if(trinkets.number >= 1){
-        trinkets.number --;
+        trinkets.number--;
         seed.number += 10;
         trinkets.counter.innerHTML = `Trinkets: ${trinkets.number}`;
         seed.counter.innerHTML = `Seed: ${seed.number}`;

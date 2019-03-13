@@ -105,25 +105,52 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-// rendering HTML content
 var root = document.querySelector('#root');
-root.innerHTML = "\n    <ul id=\"resources\" class=\"column\">\n        <li>\n            <span id=\"trinketsCount\">Trinkets: 0</span>\n        </li>\n        <li>\n            <span id=\"seedCount\">Seed: 0</span>\n            <span id=\"feedBirds\" class=\"button\">Feed (x10)</span>\n            <span id=\"buySeed\" class=\"button\">Buy</span>\n        </li>\n    </ul>\n    <ul id=\"stats\" class=\"column\">\n        <li>\n            <span id=\"birdsCount\">Birds in garden: 0</span>\n        </li>\n    </ul>\n    <div id=\"messages\" class=\"column\">\n    </ul>\n"; // stats & resources represented as objects for organization's sake
-
-var birds = {
+var Resources = [{
   'name': 'Birds in Garden',
-  'number': 0,
-  'counter': document.querySelector('#birdsCount')
-};
-var seed = {
+  'number': 0
+}, {
   'name': 'Birdseed',
-  'number': 100,
-  'counter': document.querySelector('#seedCount')
-};
-var trinkets = {
+  'number': 100
+}, {
   'name': 'Trinkets',
-  'number': 0,
-  'counter': document.querySelector('#trinketsCount')
-};
+  'number': 0
+}];
+var Clickers = [{
+  'name': 'Click to feed birds!',
+  'cost': 10,
+  'cost-units': 'trinkets'
+}]; // component functions
+
+function Header() {
+  return "\n        <header>Bird Clicker: an Iterative Game</header>\n    ";
+}
+
+function Counters(resources) {
+  var output = '<div id="resources" class="column">';
+  resources.map(function (resource) {
+    return output += "<span>".concat(resource.name, ": ").concat(resource.number, "</span>");
+  });
+  output += '</div>';
+  return output;
+}
+
+function Buttons(clickers) {
+  // same as Counters but for clickers in lieu of resources
+  var output = '<div id="clickers" class="column">';
+  clickers.map(function (clicker) {
+    return output += "<span class=\"button\">".concat(clicker.name, "</span>");
+  });
+  output += '</div>';
+  return output;
+}
+
+function Messages() {
+  return '<div id="messages"></div>';
+} // rendering HTML content
+
+
+root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(Resources), "\n    ").concat(Buttons(Clickers), "\n    ").concat(Messages(), "\n");
 
 function addResource(resource, interval) {
   resource.number += interval;
@@ -133,16 +160,12 @@ function addResource(resource, interval) {
 function spendResource(resource, interval) {
   resource.number -= interval;
   resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
-} // write messages for the player
-
-
-function newMessage(text) {
-  var messages = document.querySelector('#messages');
-  messages.innerHTML += "<span>".concat(text, "</span>");
 } // basic clicker
 
 
-var addBirds = function addBirds(event) {
+function addBirds(event) {
+  var element = event.target;
+
   if (seed.number >= 10) {
     addResource(birds, 1);
     spendResource(seed, 10);
@@ -152,10 +175,10 @@ var addBirds = function addBirds(event) {
     newMessage('A bird left you 1 trinket!');
   } else {
     newMessage('Not enough birdseed');
-    var element = event.target;
     element.style.backgroundColor = 'lightgrey';
   }
-};
+} // change this function so that birds leave trinkets but dont stay in garden
+
 
 function feedBirdsButton() {
   var feedBirds = document.querySelector('#feedBirds');
@@ -164,7 +187,9 @@ function feedBirdsButton() {
 
 feedBirdsButton();
 
-var addSeed = function addSeed(event) {
+function addSeed(event) {
+  var element = event.target;
+
   if (trinkets.number >= 1) {
     trinkets.number--;
     seed.number += 10;
@@ -172,8 +197,9 @@ var addSeed = function addSeed(event) {
     seed.counter.innerHTML = "Seed: ".concat(seed.number);
   } else {
     newMessage('Not enough trinkets');
+    element.style.backgroundColor = 'lightgrey';
   }
-};
+}
 
 function buySeedButton() {
   var buySeed = document.querySelector('#buySeed');
@@ -208,7 +234,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59725" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63748" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
