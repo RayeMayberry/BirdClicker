@@ -146,7 +146,7 @@ var Clickers = {
 }; // component functions
 
 function Header() {
-  return "\n        <header>Bird Clicker: an Incremental Game</header>\n    ";
+  return "\n        <header>Bird Clicker: a Game of Avian Iteration</header>\n    ";
 }
 
 function Counters(resources) {
@@ -197,8 +197,8 @@ function render() {
 render(); // user alert message
 
 function newMessage(text) {
-  var destination = document.querySelector('#messages');
-  destination.innerHTML += "<span>".concat(text, "</span>");
+  var output = document.querySelector('#messages');
+  output.innerHTML += "<span>".concat(text, "</span>");
 } // making buttons do things
 
 

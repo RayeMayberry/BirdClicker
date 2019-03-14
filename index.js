@@ -33,7 +33,7 @@ var Clickers = {
 // component functions
 function Header(){
     return `
-        <header>Bird Clicker: an Incremental Game</header>
+        <header>Bird Clicker: a Game of Avian Iteration</header>
     `;
 }
 
@@ -69,7 +69,6 @@ function Messages(){
 }
 
 // rendering HTML content
-
 function render(){
     root.innerHTML = `
     ${Header()}
@@ -82,9 +81,9 @@ render();
 
 // user alert message
 function newMessage(text){
-    var destination = document.querySelector('#messages');
+    var output = document.querySelector('#messages');
     
-    destination.innerHTML += `<span>${text}</span>`;
+    output.innerHTML += `<span>${text}</span>`;
 }
 
 // making buttons do things
