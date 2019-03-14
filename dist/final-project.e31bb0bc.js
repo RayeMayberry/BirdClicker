@@ -190,7 +190,7 @@ render(); // user alert message
 
 function newMessage(text) {
   var destination = document.querySelector('#messages');
-  destination.innerHTML = "".concat(text);
+  destination.innerHTML += "".concat(text);
 } // making buttons do things
 
 

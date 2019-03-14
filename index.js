@@ -82,7 +82,7 @@ render();
 function newMessage(text){
     var destination = document.querySelector('#messages');
     
-    destination.innerHTML = `${text}`;
+    destination.innerHTML += `${text}`;
 }
 
 // making buttons do things
