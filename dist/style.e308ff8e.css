@@ -20,7 +20,6 @@ header {
 .column {
     display: flex;
     flex-direction: column;
-    align-content: flex-start;
 }
 
 #messages {
@@ -29,14 +28,14 @@ header {
     overflow-y: auto;
 }
 
+span {
+    display: inline-block;
+}
+
 .button {
     background-color: grey;
     margin: 5px;
 }
 .button:hover{
     cursor: pointer;
-}
-
-#birdsCount{
-    background-color: lightgreen;
 }

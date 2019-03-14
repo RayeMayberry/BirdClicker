@@ -123,26 +123,31 @@ var Clickers = {
   'scatterBirdseed': {
     'name': 'Scatter some birdseed',
     'buy': Resources.Trinkets,
+    // resource to buy
+    'buyCount': 1,
+    // how many?
     'spend': Resources.Birdseed,
-    'price': 10,
+    // resource to spend
+    'spendCount': 10,
+    // how many?
     'errorMessage': 'Not enough birdseed'
   },
   'buyBirdseed': {
     'name': 'Buy more birdseed',
-    'buy': Resources.Trinkets,
-    'spend': Resources.Birdseed,
-    'price': 10,
+    'buy': Resources.Birdseed,
+    'buyCount': 10,
+    'spend': Resources.Trinkets,
+    'spend.count': 1,
     'errorMessage': 'Not enough trinkets'
   }
 }; // component functions
 
 function Header() {
-  return "\n        <header>Bird Clicker: an Iterative Game</header>\n    ";
+  return "\n        <header>Bird Clicker: an Incremental Game</header>\n    ";
 }
 
 function Counters(resources) {
-  var output = '<div id="resources" class="column">'; // var entries = Object.entries(resources);
-  // entries.forEach((entry) => (entry[1] > 0 ? output += `<span>${entry[0]}: ${entry[1]}</span>` : output += ''));
+  var output = '<div id="resources" class="column">';
 
   var _arr = Object.entries(resources);
 
@@ -190,7 +195,7 @@ render(); // user alert message
 
 function newMessage(text) {
   var destination = document.querySelector('#messages');
-  destination.innerHTML += "".concat(text);
+  destination.innerHTML += "<span>".concat(text, "</span>");
 } // making buttons do things
 
 
@@ -202,12 +207,11 @@ function manageResources(clickers) {
         key = _arr3$_i[0],
         value = _arr3$_i[1];
 
-    // could put contents in the Buttons function if i could figure out how to turn the HTML elements into an object without passing them thru Render() first, ie not having to use document.getElementById
     var button = document.getElementById("".concat(key));
     button.addEventListener('click', function (event) {
-      if (value.spend > 0) {
-        value.buy++;
-        value.spend -= value.price;
+      if (value.spend >= value.spendCount) {
+        value.buy += value.buyCount;
+        value.spend -= value.spendCount; // update counters???
       } else {
         newMessage("".concat(value.errorMessage));
       }
