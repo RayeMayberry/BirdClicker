@@ -113,6 +113,7 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/* eslint-disable no-loop-func */
 var root = document.querySelector('#root');
 var Resources = {
   'Birds': 0,
@@ -122,11 +123,11 @@ var Resources = {
 var Clickers = {
   'scatterBirdseed': {
     'name': 'Scatter some birdseed',
-    'buy': Resources.Trinkets,
+    'buy': 'Trinkets',
     // resource to buy
     'buyCount': 1,
     // how many?
-    'spend': Resources.Birdseed,
+    'spend': 'Birdseed',
     // resource to spend
     'spendCount': 10,
     // how many?
@@ -135,9 +136,9 @@ var Clickers = {
   },
   'buyBirdseed': {
     'name': 'Buy more birdseed',
-    'buy': Resources.Birdseed,
+    'buy': 'Birdseed',
     'buyCount': 10,
-    'spend': Resources.Trinkets,
+    'spend': 'Trinkets',
     'spend.count': 1,
     'successMessage': '',
     'errorMessage': 'Not enough trinkets'
@@ -211,9 +212,9 @@ function manageResources(clickers) {
 
     var button = document.getElementById("".concat(key));
     button.addEventListener('click', function (event) {
-      if (value.spend >= value.spendCount) {
-        value.buy += value.buyCount;
-        value.spend -= value.spendCount; // update counters???
+      if (Resources["".concat(value.spend)] >= value.spendCount) {
+        Resources["".concat(value.buy)] += value.buyCount;
+        Resources["".concat(value.spend)] -= value.spendCount; // update counters???
 
         newMessage("".concat(value.successMessage));
       } else {

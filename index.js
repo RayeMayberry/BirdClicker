@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 
 var root = document.querySelector('#root');
 
@@ -10,18 +11,18 @@ var Resources = {
 var Clickers = {
     'scatterBirdseed': {
         'name': 'Scatter some birdseed',
-        'buy': Resources.Trinkets, // resource to buy
+        'buy': 'Trinkets', // resource to buy
         'buyCount': 1, // how many?
-        'spend': Resources.Birdseed, // resource to spend
+        'spend': 'Birdseed', // resource to spend
         'spendCount': 10, // how many?
         'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.',
         'errorMessage': 'Not enough birdseed'
     },
     'buyBirdseed': {
         'name': 'Buy more birdseed',
-        'buy': Resources.Birdseed,
+        'buy': 'Birdseed',
         'buyCount': 10,
-        'spend': Resources.Trinkets,
+        'spend': 'Trinkets',
         'spend.count': 1,
         'successMessage': '',
         'errorMessage': 'Not enough trinkets'
@@ -92,9 +93,9 @@ function manageResources(clickers){
         let button = document.getElementById(`${key}`);
 
         button.addEventListener('click', (event) => {
-            if(value.spend >= value.spendCount){
-                value.buy += value.buyCount;
-                value.spend -= value.spendCount;
+            if(Resources[`${value.spend}`] >= value.spendCount){
+                Resources[`${value.buy}`] += value.buyCount;
+                Resources[`${value.spend}`] -= value.spendCount;
                 // update counters???
                 newMessage(`${value.successMessage}`);
             }
