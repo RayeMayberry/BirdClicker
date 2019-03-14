@@ -139,7 +139,7 @@ var Clickers = {
     'buy': 'Birdseed',
     'buyCount': 10,
     'spend': 'Trinkets',
-    'spend.count': 1,
+    'spendCount': 1,
     'successMessage': '',
     'errorMessage': 'Not enough trinkets'
   }
@@ -214,8 +214,7 @@ function manageResources(clickers) {
     button.addEventListener('click', function (event) {
       if (Resources["".concat(value.spend)] >= value.spendCount) {
         Resources["".concat(value.buy)] += value.buyCount;
-        Resources["".concat(value.spend)] -= value.spendCount; // update counters???
-
+        Resources["".concat(value.spend)] -= value.spendCount;
         newMessage("".concat(value.successMessage));
       } else {
         newMessage("".concat(value.errorMessage));

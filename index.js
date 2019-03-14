@@ -23,7 +23,7 @@ var Clickers = {
         'buy': 'Birdseed',
         'buyCount': 10,
         'spend': 'Trinkets',
-        'spend.count': 1,
+        'spendCount': 1,
         'successMessage': '',
         'errorMessage': 'Not enough trinkets'
     }
@@ -96,7 +96,7 @@ function manageResources(clickers){
             if(Resources[`${value.spend}`] >= value.spendCount){
                 Resources[`${value.buy}`] += value.buyCount;
                 Resources[`${value.spend}`] -= value.spendCount;
-                // update counters???
+                
                 newMessage(`${value.successMessage}`);
             }
             else{
