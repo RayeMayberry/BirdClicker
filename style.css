@@ -21,18 +21,17 @@ header {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    
 }
 
 #messages {
     flex-direction: column-reverse;
     justify-content: flex-end;
-    height: 100vh;
     overflow-y: auto;
 }
 
 .button {
     background-color: grey;
+    margin: 5px;
 }
 .button:hover{
     cursor: pointer;

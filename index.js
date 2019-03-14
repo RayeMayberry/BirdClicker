@@ -1,27 +1,29 @@
 
 var root = document.querySelector('#root');
 
-var Resources = [
-    {
-        'name': 'Birds in Garden',
-        'number': 0
+var Resources = {
+    'Birds': 0,
+    'Birdseed': 100,
+    'Trinkets': 0
+};
+
+var Clickers = {
+    'scatterBirdseed': {
+        'name': 'Scatter some birdseed',
+        'buy': Resources.Trinkets,
+        'spend': Resources.Birdseed,
+        'price': 10,
+        'errorMessage': 'Not enough birdseed'
     },
-    {
-        'name': 'Birdseed',
-        'number': 100
-    },
-    {
-        'name': 'Trinkets',
-        'number': 0
+    'buyBirdseed': {
+        'name': 'Buy more birdseed',
+        'buy': Resources.Trinkets,
+        'spend': Resources.Birdseed,
+        'price': 10,
+        'errorMessage': 'Not enough trinkets'
     }
-];
-var Clickers = [
-    {
-        'name': 'Click to feed birds!',
-        'cost': 10,
-        'cost-units': 'trinkets'
-    }
-];
+};
+
 
 // component functions
 function Header(){
@@ -29,92 +31,76 @@ function Header(){
         <header>Bird Clicker: an Iterative Game</header>
     `;
 }
+
 function Counters(resources){
     var output = '<div id="resources" class="column">';
 
-    resources.map((resource) => output += `<span>${resource.name}: ${resource.number}</span>`);
+    // var entries = Object.entries(resources);
+
+    // entries.forEach((entry) => (entry[1] > 0 ? output += `<span>${entry[0]}: ${entry[1]}</span>` : output += ''));
+    for(const [ key, value ] of Object.entries(resources)){
+        if(value > 0){
+            output += `<span id="${key}">${key}: ${value}</span>`;
+        }
+    }
+
     output += '</div>';
 
     return output;
 }
+
 function Buttons(clickers){
-    // same as Counters but for clickers in lieu of resources
     var output = '<div id="clickers" class="column">';
 
-    clickers.map((clicker) => output += `<span class="button">${clicker.name}</span>`);
-
+    // for each object in the Clickers array, create a button with a name that manipulates resources
+    for(const [ key, value ] of Object.entries(clickers)){
+        output += `<span id="${key}" class="button">${value.name}</span>`;
+    }
+    
     output += '</div>';
     
     return output;
 }
+
 function Messages(){
     return '<div id="messages"></div>';
 }
 
 // rendering HTML content
 
-root.innerHTML = `
+function render(){
+    root.innerHTML = `
     ${Header()}
     ${Counters(Resources)}
     ${Buttons(Clickers)}
     ${Messages()}
 `;
-
-
-function addResource(resource, interval){
-    resource.number += interval;
-    resource.counter.innerHTML = `${resource.name}: ${resource.number}`;
 }
-function spendResource(resource, interval){
-    resource.number -= interval;
-    resource.counter.innerHTML = `${resource.name}: ${resource.number}`;
+render();
+
+// user alert message
+function newMessage(text){
+    var destination = document.querySelector('#messages');
+    
+    destination.innerHTML = `${text}`;
 }
 
+// making buttons do things
+function manageResources(clickers){
+    for(const [ key, value ] of Object.entries(clickers)){
+        // could put contents in the Buttons function if i could figure out how to turn the HTML elements into an object without passing them thru Render() first, ie not having to use document.getElementById
+        let button = document.getElementById(`${key}`);
 
-// basic clicker
-function addBirds(event){
-    var element = event.target;
-
-    if(seed.number >= 10){
-        addResource(birds, 1);
-        spendResource(seed, 10);
-        addResource(trinkets, 1);
-        newMessage('A bird landed in the garden!');
-        newMessage('-10 birdseed');
-        newMessage('A bird left you 1 trinket!');
-    }
-    else{
-        newMessage('Not enough birdseed');
-        element.style.backgroundColor = 'lightgrey';
+        button.addEventListener('click', (event) => {
+            if(value.spend > 0){
+                value.buy++;
+                value.spend -= value.price;
+            }
+            else{
+                newMessage(`${value.errorMessage}`);
+            }
+        });
     }
 }
 
-// change this function so that birds leave trinkets but dont stay in garden
-function feedBirdsButton(){
-    var feedBirds = document.querySelector('#feedBirds');
-
-    feedBirds.addEventListener('click', addBirds);
-}
-feedBirdsButton();
-
-function addSeed(event){
-    var element = event.target;
-
-    if(trinkets.number >= 1){
-        trinkets.number--;
-        seed.number += 10;
-        trinkets.counter.innerHTML = `Trinkets: ${trinkets.number}`;
-        seed.counter.innerHTML = `Seed: ${seed.number}`;
-    }
-    else{
-        newMessage('Not enough trinkets');
-        element.style.backgroundColor = 'lightgrey';
-    }
-}
-
-function buySeedButton(){
-    var buySeed = document.querySelector('#buySeed');
-
-    buySeed.addEventListener('click', addSeed);
-}
-buySeedButton();
+manageResources(Clickers);

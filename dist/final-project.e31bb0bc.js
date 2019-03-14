@@ -105,42 +105,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var root = document.querySelector('#root');
-var Resources = [{
-  'name': 'Birds in Garden',
-  'number': 0
-}, {
-  'name': 'Birdseed',
-  'number': 100
-}, {
-  'name': 'Trinkets',
-  'number': 0
-}];
-var Clickers = [{
-  'name': 'Click to feed birds!',
-  'cost': 10,
-  'cost-units': 'trinkets'
-}]; // component functions
+var Resources = {
+  'Birds': 0,
+  'Birdseed': 100,
+  'Trinkets': 0
+};
+var Clickers = {
+  'scatterBirdseed': {
+    'name': 'Scatter some birdseed',
+    'buy': Resources.Trinkets,
+    'spend': Resources.Birdseed,
+    'price': 10,
+    'errorMessage': 'Not enough birdseed'
+  },
+  'buyBirdseed': {
+    'name': 'Buy more birdseed',
+    'buy': Resources.Trinkets,
+    'spend': Resources.Birdseed,
+    'price': 10,
+    'errorMessage': 'Not enough trinkets'
+  }
+}; // component functions
 
 function Header() {
   return "\n        <header>Bird Clicker: an Iterative Game</header>\n    ";
 }
 
 function Counters(resources) {
-  var output = '<div id="resources" class="column">';
-  resources.map(function (resource) {
-    return output += "<span>".concat(resource.name, ": ").concat(resource.number, "</span>");
-  });
+  var output = '<div id="resources" class="column">'; // var entries = Object.entries(resources);
+  // entries.forEach((entry) => (entry[1] > 0 ? output += `<span>${entry[0]}: ${entry[1]}</span>` : output += ''));
+
+  var _arr = Object.entries(resources);
+
+  for (var _i = 0; _i < _arr.length; _i++) {
+    var _arr$_i = _slicedToArray(_arr[_i], 2),
+        key = _arr$_i[0],
+        value = _arr$_i[1];
+
+    if (value > 0) {
+      output += "<span id=\"".concat(key, "\">").concat(key, ": ").concat(value, "</span>");
+    }
+  }
+
   output += '</div>';
   return output;
 }
 
 function Buttons(clickers) {
-  // same as Counters but for clickers in lieu of resources
-  var output = '<div id="clickers" class="column">';
-  clickers.map(function (clicker) {
-    return output += "<span class=\"button\">".concat(clicker.name, "</span>");
-  });
+  var output = '<div id="clickers" class="column">'; // for each object in the Clickers array, create a button with a name that manipulates resources
+
+  var _arr2 = Object.entries(clickers);
+
+  for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
+    var _arr2$_i = _slicedToArray(_arr2[_i2], 2),
+        key = _arr2$_i[0],
+        value = _arr2$_i[1];
+
+    output += "<span id=\"".concat(key, "\" class=\"button\">").concat(value.name, "</span>");
+  }
+
   output += '</div>';
   return output;
 }
@@ -150,63 +182,44 @@ function Messages() {
 } // rendering HTML content
 
 
-root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(Resources), "\n    ").concat(Buttons(Clickers), "\n    ").concat(Messages(), "\n");
-
-function addResource(resource, interval) {
-  resource.number += interval;
-  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
+function render() {
+  root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(Resources), "\n    ").concat(Buttons(Clickers), "\n    ").concat(Messages(), "\n");
 }
 
-function spendResource(resource, interval) {
-  resource.number -= interval;
-  resource.counter.innerHTML = "".concat(resource.name, ": ").concat(resource.number);
-} // basic clicker
+render(); // user alert message
+
+function newMessage(text) {
+  var destination = document.querySelector('#messages');
+  destination.innerHTML = "".concat(text);
+} // making buttons do things
 
 
-function addBirds(event) {
-  var element = event.target;
+function manageResources(clickers) {
+  var _arr3 = Object.entries(clickers);
 
-  if (seed.number >= 10) {
-    addResource(birds, 1);
-    spendResource(seed, 10);
-    addResource(trinkets, 1);
-    newMessage('A bird landed in the garden!');
-    newMessage('-10 birdseed');
-    newMessage('A bird left you 1 trinket!');
-  } else {
-    newMessage('Not enough birdseed');
-    element.style.backgroundColor = 'lightgrey';
-  }
-} // change this function so that birds leave trinkets but dont stay in garden
+  var _loop = function _loop() {
+    var _arr3$_i = _slicedToArray(_arr3[_i3], 2),
+        key = _arr3$_i[0],
+        value = _arr3$_i[1];
 
+    // could put contents in the Buttons function if i could figure out how to turn the HTML elements into an object without passing them thru Render() first, ie not having to use document.getElementById
+    var button = document.getElementById("".concat(key));
+    button.addEventListener('click', function (event) {
+      if (value.spend > 0) {
+        value.buy++;
+        value.spend -= value.price;
+      } else {
+        newMessage("".concat(value.errorMessage));
+      }
+    });
+  };
 
-function feedBirdsButton() {
-  var feedBirds = document.querySelector('#feedBirds');
-  feedBirds.addEventListener('click', addBirds);
-}
-
-feedBirdsButton();
-
-function addSeed(event) {
-  var element = event.target;
-
-  if (trinkets.number >= 1) {
-    trinkets.number--;
-    seed.number += 10;
-    trinkets.counter.innerHTML = "Trinkets: ".concat(trinkets.number);
-    seed.counter.innerHTML = "Seed: ".concat(seed.number);
-  } else {
-    newMessage('Not enough trinkets');
-    element.style.backgroundColor = 'lightgrey';
+  for (var _i3 = 0; _i3 < _arr3.length; _i3++) {
+    _loop();
   }
 }
 
-function buySeedButton() {
-  var buySeed = document.querySelector('#buySeed');
-  buySeed.addEventListener('click', addSeed);
-}
-
-buySeedButton();
+manageResources(Clickers);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
