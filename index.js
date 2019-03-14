@@ -14,6 +14,7 @@ var Clickers = {
         'buyCount': 1, // how many?
         'spend': Resources.Birdseed, // resource to spend
         'spendCount': 10, // how many?
+        'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.',
         'errorMessage': 'Not enough birdseed'
     },
     'buyBirdseed': {
@@ -22,6 +23,7 @@ var Clickers = {
         'buyCount': 10,
         'spend': Resources.Trinkets,
         'spend.count': 1,
+        'successMessage': '',
         'errorMessage': 'Not enough trinkets'
     }
 };
@@ -94,10 +96,12 @@ function manageResources(clickers){
                 value.buy += value.buyCount;
                 value.spend -= value.spendCount;
                 // update counters???
+                newMessage(`${value.successMessage}`);
             }
             else{
                 newMessage(`${value.errorMessage}`);
             }
+            console.log(Resources);
         });
     }
 }
