@@ -5,7 +5,8 @@ var root = document.querySelector('#root');
 var Resources = {
     'Birds': 0,
     'Birdseed': 100,
-    'Trinkets': 0
+    'Trinkets': 0,
+    'Small Birdfeeder': 0
 };
 
 var Clickers = {
@@ -24,6 +25,15 @@ var Clickers = {
         'buyCount': 10,
         'spend': 'Trinkets',
         'spendCount': 1,
+        'successMessage': '',
+        'errorMessage': 'Not enough trinkets'
+    },
+    'smallBirdfeeder': {
+        'name': 'x1 Small Birdfeeder',
+        'buy': 'Small Birdfeeder',
+        'buyCount': 1,
+        'spend': 'Trinkets',
+        'spendCount': 5,
         'successMessage': '',
         'errorMessage': 'Not enough trinkets'
     }
