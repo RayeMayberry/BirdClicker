@@ -39,14 +39,18 @@ var Clickers = {
     }
 };
 
+var Alerts = [
+    '<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>'
+];
 
-// component functions
+// Header component
 function Header(){
     return `
         <header>Bird Clicker: a Game of Avian Iteration</header>
     `;
 }
 
+// Counters component
 function Counters(resources){
     var output = '<div id="resources" class="column">';
 
@@ -61,6 +65,7 @@ function Counters(resources){
     return output;
 }
 
+// Buttons component
 function Buttons(clickers){
     var output = '<div id="clickers" class="column">';
 
@@ -75,29 +80,26 @@ function Buttons(clickers){
     return output;
 }
 
-function Messages(){
-    return '<div id="messages" class="column"><span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span></div>';
+// Messages
+function Messages(alerts){
+    return `<div id="messages" class="column">${alerts.join(' ')}</div>`;
 }
 // user alert message
 function newMessage(text){
-    var output = document.querySelector('#messages');
-    
-    output.innerHTML += `<span>${text}</span>`;
+    Alerts.push(`<span>${text}</span>`);
 }
 
 // rendering HTML content
-function render(resources, clickers){
+function render(resources, clickers, alerts){
     root.innerHTML = `
     ${Header()}
     ${Counters(resources)}
     ${Buttons(clickers)}
-    ${Messages()}
+    ${Messages(alerts)}
 `;
     // incoming: CHRISTMAS TREE OF DOOM
     for(const [ key, value ] of Object.entries(clickers)){
         let button = document.querySelector(`#${key}`);
-
-        console.log(button);
 
         if(button){
             button.addEventListener('click', (event) => {
@@ -105,16 +107,16 @@ function render(resources, clickers){
                     Resources[`${value.buy}`] += value.buyCount;
                     Resources[`${value.spend}`] -= value.spendCount;
             
-                    render(Resources, Clickers);
-            
                     newMessage(`${value.successMessage}`);
                 }
                 else{
                     newMessage(`${value.errorMessage}`);
                 }
+                render(Resources, Clickers, Alerts);
+                console.log(Alerts);
             });
         }
     }
 }
-render(Resources, Clickers);
+render(Resources, Clickers, Alerts);
 

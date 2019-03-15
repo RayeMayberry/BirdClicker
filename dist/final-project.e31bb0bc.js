@@ -153,11 +153,13 @@ var Clickers = {
     'successMessage': '',
     'errorMessage': 'Not enough trinkets'
   }
-}; // component functions
+};
+var Alerts = ['<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>']; // Header component
 
 function Header() {
   return "\n        <header>Bird Clicker: a Game of Avian Iteration</header>\n    ";
-}
+} // Counters component
+
 
 function Counters(resources) {
   var output = '<div id="resources" class="column">';
@@ -176,7 +178,8 @@ function Counters(resources) {
 
   output += '</div>';
   return output;
-}
+} // Buttons component
+
 
 function Buttons(clickers) {
   var output = '<div id="clickers" class="column">';
@@ -195,21 +198,21 @@ function Buttons(clickers) {
 
   output += '</div>';
   return output;
-}
+} // Messages
 
-function Messages() {
-  return '<div id="messages" class="column"><span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span></div>';
+
+function Messages(alerts) {
+  return "<div id=\"messages\" class=\"column\">".concat(alerts.join(' '), "</div>");
 } // user alert message
 
 
 function newMessage(text) {
-  var output = document.querySelector('#messages');
-  output.innerHTML += "<span>".concat(text, "</span>");
+  Alerts.push("<span>".concat(text, "</span>"));
 } // rendering HTML content
 
 
-function render(resources, clickers) {
-  root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(resources), "\n    ").concat(Buttons(clickers), "\n    ").concat(Messages(), "\n"); // incoming: CHRISTMAS TREE OF DOOM
+function render(resources, clickers, alerts) {
+  root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(resources), "\n    ").concat(Buttons(clickers), "\n    ").concat(Messages(alerts), "\n"); // incoming: CHRISTMAS TREE OF DOOM
 
   var _arr3 = Object.entries(clickers);
 
@@ -219,18 +222,19 @@ function render(resources, clickers) {
         value = _arr3$_i[1];
 
     var button = document.querySelector("#".concat(key));
-    console.log(button);
 
     if (button) {
       button.addEventListener('click', function (event) {
         if (Resources["".concat(value.spend)] >= value.spendCount) {
           Resources["".concat(value.buy)] += value.buyCount;
           Resources["".concat(value.spend)] -= value.spendCount;
-          render(Resources, Clickers);
           newMessage("".concat(value.successMessage));
         } else {
           newMessage("".concat(value.errorMessage));
         }
+
+        render(Resources, Clickers, Alerts);
+        console.log(Alerts);
       });
     }
   };
@@ -240,7 +244,7 @@ function render(resources, clickers) {
   }
 }
 
-render(Resources, Clickers);
+render(Resources, Clickers, Alerts);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -268,7 +272,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49438" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56971" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
