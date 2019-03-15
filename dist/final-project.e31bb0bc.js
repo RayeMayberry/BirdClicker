@@ -199,6 +199,19 @@ render(); // user alert message
 function newMessage(text) {
   var output = document.querySelector('#messages');
   output.innerHTML += "<span>".concat(text, "</span>");
+}
+
+function updateCounters(id) {
+  var counter = document.querySelector("#".concat(id));
+  var resourcesColumn = document.querySelector('#resources');
+
+  if (counter) {
+    counter.innerHTML = "".concat(id, ": ").concat(Resources[id]);
+  } else {
+    resourcesColumn.innerHTML += "<span id=\"".concat(id, "\">").concat(id, ": ").concat(Resources[id], "</span>");
+  }
+
+  console.log(counter);
 } // making buttons do things
 
 
@@ -215,6 +228,8 @@ function manageResources(clickers) {
       if (Resources["".concat(value.spend)] >= value.spendCount) {
         Resources["".concat(value.buy)] += value.buyCount;
         Resources["".concat(value.spend)] -= value.spendCount;
+        updateCounters(value.buy);
+        updateCounters(value.spend);
         newMessage("".concat(value.successMessage));
       } else {
         newMessage("".concat(value.errorMessage));
@@ -257,7 +272,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63748" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62059" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

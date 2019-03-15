@@ -86,6 +86,20 @@ function newMessage(text){
     output.innerHTML += `<span>${text}</span>`;
 }
 
+function updateCounters(id){
+    var counter = document.querySelector(`#${id}`);
+    var resourcesColumn = document.querySelector('#resources');
+
+    if(counter){
+        counter.innerHTML = `${id}: ${Resources[id]}`;
+    }
+    else{
+        resourcesColumn.innerHTML += `<span id="${id}">${id}: ${Resources[id]}</span>`;
+    }
+
+    console.log(counter);
+}
+
 // making buttons do things
 function manageResources(clickers){
     for(const [ key, value ] of Object.entries(clickers)){
@@ -95,6 +109,9 @@ function manageResources(clickers){
             if(Resources[`${value.spend}`] >= value.spendCount){
                 Resources[`${value.buy}`] += value.buyCount;
                 Resources[`${value.spend}`] -= value.spendCount;
+                
+                updateCounters(value.buy);
+                updateCounters(value.spend);
                 
                 newMessage(`${value.successMessage}`);
             }
