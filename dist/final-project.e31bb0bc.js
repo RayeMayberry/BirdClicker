@@ -141,7 +141,7 @@ var Clickers = {
     'buyCount': 10,
     'spend': 'Trinkets',
     'spendCount': 1,
-    'successMessage': '',
+    'successMessage': null,
     'errorMessage': 'Not enough trinkets'
   },
   'smallBirdfeeder': {
@@ -150,7 +150,7 @@ var Clickers = {
     'buyCount': 1,
     'spend': 'Trinkets',
     'spendCount': 5,
-    'successMessage': '',
+    'successMessage': null,
     'errorMessage': 'Not enough trinkets'
   }
 };
@@ -228,13 +228,15 @@ function render(resources, clickers, alerts) {
         if (Resources["".concat(value.spend)] >= value.spendCount) {
           Resources["".concat(value.buy)] += value.buyCount;
           Resources["".concat(value.spend)] -= value.spendCount;
-          newMessage("".concat(value.successMessage));
+
+          if (value.successMessage) {
+            newMessage("".concat(value.successMessage));
+          }
         } else {
           newMessage("".concat(value.errorMessage));
         }
 
         render(Resources, Clickers, Alerts);
-        console.log(Alerts);
       });
     }
   };

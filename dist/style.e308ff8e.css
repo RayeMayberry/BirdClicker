@@ -44,3 +44,14 @@ span {
 .button:hover{
     cursor: pointer;
 }
+
+@media(orientation: portrait){
+    #root{
+        grid-template-columns: auto auto;
+    }
+
+    #header, #messages{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
