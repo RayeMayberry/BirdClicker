@@ -179,7 +179,7 @@ function Counters(resources) {
 }
 
 function Buttons(clickers) {
-  var output = '<div id="clickers" class="column">'; // for each object in the Clickers array, create a button with a name that manipulates resources
+  var output = '<div id="clickers" class="column">';
 
   var _arr2 = Object.entries(clickers);
 
@@ -188,7 +188,9 @@ function Buttons(clickers) {
         key = _arr2$_i[0],
         value = _arr2$_i[1];
 
-    output += "<span id=\"".concat(key, "\" class=\"button\">").concat(value.name, "</span>");
+    if (Resources[value.spend] >= value.spendCount) {
+      output += "<span id=\"".concat(key, "\" class=\"button\">").concat(value.name, "</span>");
+    }
   }
 
   output += '</div>';
@@ -197,35 +199,18 @@ function Buttons(clickers) {
 
 function Messages() {
   return '<div id="messages" class="column"><span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span></div>';
-} // rendering HTML content
+} // user alert message
 
-
-function render() {
-  root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(Resources), "\n    ").concat(Buttons(Clickers), "\n    ").concat(Messages(), "\n");
-}
-
-render(); // user alert message
 
 function newMessage(text) {
   var output = document.querySelector('#messages');
   output.innerHTML += "<span>".concat(text, "</span>");
-}
-
-function updateCounters(id) {
-  var counter = document.querySelector("#".concat(id));
-  var resourcesColumn = document.querySelector('#resources');
-
-  if (counter) {
-    counter.innerHTML = "".concat(id, ": ").concat(Resources[id]);
-  } else {
-    resourcesColumn.innerHTML += "<span id=\"".concat(id, "\">").concat(id, ": ").concat(Resources[id], "</span>");
-  }
-
-  console.log(counter);
-} // making buttons do things
+} // rendering HTML content
 
 
-function manageResources(clickers) {
+function render(resources, clickers) {
+  root.innerHTML = "\n    ".concat(Header(), "\n    ").concat(Counters(resources), "\n    ").concat(Buttons(clickers), "\n    ").concat(Messages(), "\n"); // incoming: CHRISTMAS TREE OF DOOM
+
   var _arr3 = Object.entries(clickers);
 
   var _loop = function _loop() {
@@ -233,20 +218,21 @@ function manageResources(clickers) {
         key = _arr3$_i[0],
         value = _arr3$_i[1];
 
-    var button = document.getElementById("".concat(key));
-    button.addEventListener('click', function (event) {
-      if (Resources["".concat(value.spend)] >= value.spendCount) {
-        Resources["".concat(value.buy)] += value.buyCount;
-        Resources["".concat(value.spend)] -= value.spendCount;
-        updateCounters(value.buy);
-        updateCounters(value.spend);
-        newMessage("".concat(value.successMessage));
-      } else {
-        newMessage("".concat(value.errorMessage));
-      }
+    var button = document.querySelector("#".concat(key));
+    console.log(button);
 
-      console.log(Resources);
-    });
+    if (button) {
+      button.addEventListener('click', function (event) {
+        if (Resources["".concat(value.spend)] >= value.spendCount) {
+          Resources["".concat(value.buy)] += value.buyCount;
+          Resources["".concat(value.spend)] -= value.spendCount;
+          render(Resources, Clickers);
+          newMessage("".concat(value.successMessage));
+        } else {
+          newMessage("".concat(value.errorMessage));
+        }
+      });
+    }
   };
 
   for (var _i3 = 0; _i3 < _arr3.length; _i3++) {
@@ -254,7 +240,7 @@ function manageResources(clickers) {
   }
 }
 
-manageResources(Clickers);
+render(Resources, Clickers);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

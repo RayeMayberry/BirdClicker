@@ -64,9 +64,10 @@ function Counters(resources){
 function Buttons(clickers){
     var output = '<div id="clickers" class="column">';
 
-    // for each object in the Clickers array, create a button with a name that manipulates resources
     for(const [ key, value ] of Object.entries(clickers)){
-        output += `<span id="${key}" class="button">${value.name}</span>`;
+        if(Resources[value.spend] >= value.spendCount){
+            output += `<span id="${key}" class="button">${value.name}</span>`;
+        }
     }
     
     output += '</div>';
@@ -77,18 +78,6 @@ function Buttons(clickers){
 function Messages(){
     return '<div id="messages" class="column"><span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span></div>';
 }
-
-// rendering HTML content
-function render(){
-    root.innerHTML = `
-    ${Header()}
-    ${Counters(Resources)}
-    ${Buttons(Clickers)}
-    ${Messages()}
-`;
-}
-render();
-
 // user alert message
 function newMessage(text){
     var output = document.querySelector('#messages');
@@ -96,41 +85,36 @@ function newMessage(text){
     output.innerHTML += `<span>${text}</span>`;
 }
 
-function updateCounters(id){
-    var counter = document.querySelector(`#${id}`);
-    var resourcesColumn = document.querySelector('#resources');
-
-    if(counter){
-        counter.innerHTML = `${id}: ${Resources[id]}`;
-    }
-    else{
-        resourcesColumn.innerHTML += `<span id="${id}">${id}: ${Resources[id]}</span>`;
-    }
-
-    console.log(counter);
-}
-
-// making buttons do things
-function manageResources(clickers){
+// rendering HTML content
+function render(resources, clickers){
+    root.innerHTML = `
+    ${Header()}
+    ${Counters(resources)}
+    ${Buttons(clickers)}
+    ${Messages()}
+`;
+    // incoming: CHRISTMAS TREE OF DOOM
     for(const [ key, value ] of Object.entries(clickers)){
-        let button = document.getElementById(`${key}`);
+        let button = document.querySelector(`#${key}`);
 
-        button.addEventListener('click', (event) => {
-            if(Resources[`${value.spend}`] >= value.spendCount){
-                Resources[`${value.buy}`] += value.buyCount;
-                Resources[`${value.spend}`] -= value.spendCount;
-                
-                updateCounters(value.buy);
-                updateCounters(value.spend);
-                
-                newMessage(`${value.successMessage}`);
-            }
-            else{
-                newMessage(`${value.errorMessage}`);
-            }
-            console.log(Resources);
-        });
+        console.log(button);
+
+        if(button){
+            button.addEventListener('click', (event) => {
+                if(Resources[`${value.spend}`] >= value.spendCount){
+                    Resources[`${value.buy}`] += value.buyCount;
+                    Resources[`${value.spend}`] -= value.spendCount;
+            
+                    render(Resources, Clickers);
+            
+                    newMessage(`${value.successMessage}`);
+                }
+                else{
+                    newMessage(`${value.errorMessage}`);
+                }
+            });
+        }
     }
 }
+render(Resources, Clickers);
 
-manageResources(Clickers);
