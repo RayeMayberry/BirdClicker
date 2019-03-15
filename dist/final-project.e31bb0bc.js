@@ -186,7 +186,7 @@ function Buttons(clickers) {
 }
 
 function Messages() {
-  return '<div id="messages"></div>';
+  return '<div id="messages" class="column"><span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span></div>';
 } // rendering HTML content
 
 

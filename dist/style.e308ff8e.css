@@ -1,12 +1,13 @@
 body {
     background-color: thistle;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 14pt;
 }
 
 #root {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto 1fr;
+    width: 90vw;
+    margin: 0 auto;
 }
 
 header {
@@ -20,6 +21,7 @@ header {
 .column {
     display: flex;
     flex-direction: column;
+    font-size: 12pt;
 }
 
 #messages {
@@ -30,11 +32,13 @@ header {
 
 span {
     display: inline-block;
+    margin: 5px;
+    padding: 3px;
 }
 
 .button {
     background-color: grey;
-    margin: 5px;
+    color: white;
 }
 .button:hover{
     cursor: pointer;
