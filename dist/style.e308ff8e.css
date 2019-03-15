@@ -6,8 +6,10 @@ body {
 #root {
     display: grid;
     grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto 1fr;
     width: 90vw;
     margin: 0 auto;
+    height: 100vh;
 }
 
 header {
@@ -27,7 +29,6 @@ header {
 #messages {
     flex-direction: column-reverse;
     justify-content: flex-end;
-    overflow-y: auto;
 }
 
 span {
@@ -42,4 +43,15 @@ span {
 }
 .button:hover{
     cursor: pointer;
+}
+
+@media(orientation: portrait){
+    #root{
+        grid-template-columns: auto auto;
+    }
+
+    #header, #messages{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }
