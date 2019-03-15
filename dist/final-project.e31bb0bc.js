@@ -132,8 +132,7 @@ var Clickers = {
     // resource to spend
     'spendCount': 10,
     // how many?
-    'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.',
-    'errorMessage': 'Not enough birdseed'
+    'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.'
   },
   'buyBirdseed': {
     'name': 'Buy more birdseed',
@@ -141,17 +140,15 @@ var Clickers = {
     'buyCount': 10,
     'spend': 'Trinkets',
     'spendCount': 1,
-    'successMessage': null,
-    'errorMessage': 'Not enough trinkets'
+    'successMessage': null
   },
   'smallBirdfeeder': {
     'name': 'x1 Small Birdfeeder',
     'buy': 'Small Birdfeeder',
     'buyCount': 1,
     'spend': 'Trinkets',
-    'spendCount': 5,
-    'successMessage': null,
-    'errorMessage': 'Not enough trinkets'
+    'spendCount': 3,
+    'successMessage': null
   }
 };
 var Alerts = ['<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>']; // Header component
@@ -233,7 +230,7 @@ function render(resources, clickers, alerts) {
             newMessage("".concat(value.successMessage));
           }
         } else {
-          newMessage("".concat(value.errorMessage));
+          newMessage("Not enough ".concat(value.spend));
         }
 
         render(Resources, Clickers, Alerts);
