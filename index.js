@@ -3,10 +3,10 @@
 var root = document.querySelector('#root');
 
 var Resources = {
-    'Birds': 0,
+    'Birds': null,
     'Birdseed': 100,
-    'Trinkets': 0,
-    'Small Birdfeeder': 0
+    'Trinkets': null,
+    'Small Birdfeeder': null
 };
 
 var Clickers = {
@@ -16,7 +16,8 @@ var Clickers = {
         'buyCount': 1, // how many?
         'spend': 'Birdseed', // resource to spend
         'spendCount': 10, // how many?
-        'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.'
+        'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.',
+        'errorMessage': 'Not enough birdseed'
     },
     'buyBirdseed': {
         'name': 'Buy more birdseed',
@@ -24,15 +25,17 @@ var Clickers = {
         'buyCount': 10,
         'spend': 'Trinkets',
         'spendCount': 1,
-        'successMessage': null
+        'successMessage': null,
+        'errorMessage': 'Not enough trinkets'
     },
     'smallBirdfeeder': {
         'name': 'x1 Small Birdfeeder',
         'buy': 'Small Birdfeeder',
         'buyCount': 1,
         'spend': 'Trinkets',
-        'spendCount': 3,
-        'successMessage': null
+        'spendCount': 5,
+        'successMessage': null,
+        'errorMessage': 'Not enough trinkets'
     }
 };
 
@@ -52,7 +55,7 @@ function Counters(resources){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(resources)){
-        if(value > 0){
+        if(value !== null){
             output += `<span id="${key}">${key}: ${value}</span>`;
         }
     }
@@ -109,7 +112,7 @@ function render(resources, clickers, alerts){
                     }
                 }
                 else{
-                    newMessage(`Not enough ${value.spend}`);
+                    newMessage(`${value.errorMessage}`);
                 }
                 render(Resources, Clickers, Alerts);
             });
