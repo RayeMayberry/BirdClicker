@@ -3,10 +3,10 @@
 var root = document.querySelector('#root');
 
 var Resources = {
-    'Birds': 0,
+    'Birds': null,
     'Birdseed': 100,
-    'Trinkets': 0,
-    'Small Birdfeeder': 0
+    'Trinkets': null,
+    'Small Birdfeeder': null
 };
 
 var Clickers = {
@@ -55,7 +55,7 @@ function Counters(resources){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(resources)){
-        if(value > 0){
+        if(value !== null){
             output += `<span id="${key}">${key}: ${value}</span>`;
         }
     }
