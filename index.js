@@ -117,9 +117,9 @@ function render(state){
 
         if(button){
             button.addEventListener('click', (event) => {
-                if(state.Resources[`${value.spend}`] >= value.spendCount){
-                    Resources[`${value.buy}`] += value.buyCount;
-                    Resources[`${value.spend}`] -= value.spendCount;
+                if(state.Resources[`${value.spend}`].amount >= value.spendCount){
+                    state.Resources[`${value.buy}`].amount += value.buyCount;
+                    state.Resources[`${value.spend}`].amount -= value.spendCount;
             
                     if(value.successMessage){
                         newMessage(`${value.successMessage}`);
