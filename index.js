@@ -2,46 +2,55 @@
 
 var root = document.querySelector('#root');
 
-var Resources = {
-    'Birds': null,
-    'Birdseed': 100,
-    'Trinkets': null,
-    'Small Birdfeeder': null
-};
+var State = {
+    'Resources' : {
+        'Birds' : {
+            amount: null
+        },
+        'Birdseed': {
+            amount: 100
+        },
+        'Trinkets' : {
+            amount: null
+        },
+        'Small Birdfeeder' : {
+            amount: null
+        }
 
-var Clickers = {
-    'scatterBirdseed': {
-        'name': 'Scatter some birdseed',
-        'buy': 'Trinkets', // resource to buy
-        'buyCount': 1, // how many?
-        'spend': 'Birdseed', // resource to spend
-        'spendCount': 10, // how many?
-        'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket.',
-        'errorMessage': 'Not enough birdseed'
     },
-    'buyBirdseed': {
-        'name': 'Buy more birdseed',
-        'buy': 'Birdseed',
-        'buyCount': 10,
-        'spend': 'Trinkets',
-        'spendCount': 1,
-        'successMessage': null,
-        'errorMessage': 'Not enough trinkets'
+    Clickers: {
+        'scatterBirdseed': {
+            'name': 'Scatter some birdseed',
+            'buy': 'Trinkets', // resource to buy
+            'buyCount': 1, // how many?
+            'spend': 'Birdseed', // resource to spend
+            'spendCount': 10, // how many?
+            'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket. &#10024;',
+            'errorMessage': 'Not enough birdseed'
+        },
+        'buyBirdseed': {
+            'name': 'Buy more birdseed',
+            'buy': 'Birdseed',
+            'buyCount': 10,
+            'spend': 'Trinkets',
+            'spendCount': 1,
+            'successMessage': null,
+            'errorMessage': 'Not enough trinkets'
+        },
+        'smallBirdfeeder': {
+            'name': 'x1 Small Birdfeeder',
+            'buy': 'Small Birdfeeder',
+            'buyCount': 1,
+            'spend': 'Trinkets',
+            'spendCount': 6,
+            'successMessage': null,
+            'errorMessage': 'Not enough trinkets'
+        }
     },
-    'smallBirdfeeder': {
-        'name': 'x1 Small Birdfeeder',
-        'buy': 'Small Birdfeeder',
-        'buyCount': 1,
-        'spend': 'Trinkets',
-        'spendCount': 5,
-        'successMessage': null,
-        'errorMessage': 'Not enough trinkets'
-    }
+    'Alerts': [
+        '<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>'
+    ]
 };
-
-var Alerts = [
-    '<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>'
-];
 
 // Header component
 function Header(){
@@ -51,12 +60,12 @@ function Header(){
 }
 
 // Counters component
-function Counters(resources){
+function Counters(state){
     var output = '<div id="resources" class="column">';
 
-    for(const [ key, value ] of Object.entries(resources)){
-        if(value !== null){
-            output += `<span id="${key}">${key}: ${value}</span>`;
+    for(const [ key, value ] of Object.entries(state.Resources)){
+        if(value.amount !== null){
+            output += `<span id="${key}">${key}: ${value.amount}</span>`;
         }
     }
 
@@ -66,11 +75,11 @@ function Counters(resources){
 }
 
 // Buttons component
-function Buttons(clickers){
+function Buttons(state){
     var output = '<div id="clickers" class="column">';
 
-    for(const [ key, value ] of Object.entries(clickers)){
-        if(Resources[value.spend] >= value.spendCount){
+    for(const [ key, value ] of Object.entries(state.Clickers)){
+        if(state.Resources[value.spend].amount >= value.spendCount){
             output += `<span id="${key}" class="button">${value.name}</span>`;
         }
     }
@@ -81,29 +90,34 @@ function Buttons(clickers){
 }
 
 // Messages
-function Messages(alerts){
-    return `<div id="messages" class="column">${alerts.join(' ')}</div>`;
+function Messages(state){
+    return `<div id="messages" class="column">${state.Alerts.join(' ')}</div>`;
 }
 // user alert message
 function newMessage(text){
-    Alerts.push(`<span>${text}</span>`);
+    State.Alerts.push(`<span>${text}</span>`);
 }
 
+// game loop
+setInterval(() => {
+    
+}, 1000);// 1000 miliseconds = 1 second
+
 // rendering HTML content
-function render(resources, clickers, alerts){
+function render(state){
     root.innerHTML = `
     ${Header()}
-    ${Counters(resources)}
-    ${Buttons(clickers)}
-    ${Messages(alerts)}
+    ${Counters(State)}
+    ${Buttons(State)}
+    ${Messages(State)}
 `;
     // incoming: CHRISTMAS TREE OF DOOM
-    for(const [ key, value ] of Object.entries(clickers)){
+    for(const [ key, value ] of Object.entries(state.Clickers)){
         let button = document.querySelector(`#${key}`);
 
         if(button){
             button.addEventListener('click', (event) => {
-                if(Resources[`${value.spend}`] >= value.spendCount){
+                if(state.Resources[`${value.spend}`] >= value.spendCount){
                     Resources[`${value.buy}`] += value.buyCount;
                     Resources[`${value.spend}`] -= value.spendCount;
             
@@ -114,10 +128,10 @@ function render(resources, clickers, alerts){
                 else{
                     newMessage(`${value.errorMessage}`);
                 }
-                render(Resources, Clickers, Alerts);
+                render(State);
             });
         }
     }
 }
-render(Resources, Clickers, Alerts);
+render(State);
 
