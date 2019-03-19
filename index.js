@@ -14,10 +14,12 @@ var State = {
             amount: null
         },
         'Small Birdfeeder' : {
-            amount: null
+            amount: null,
+            capacity: 0.0, //0-1 scale
         }
 
     },
+
     Clickers: {
         'scatterBirdseed': {
             'name': 'Scatter some birdseed',
@@ -42,7 +44,7 @@ var State = {
             'buy': 'Small Birdfeeder',
             'buyCount': 1,
             'spend': 'Trinkets',
-            'spendCount': 6,
+            'spendCount': 4,
             'successMessage': null,
             'errorMessage': 'Not enough trinkets'
         }
@@ -100,6 +102,7 @@ function newMessage(text){
 
 // game loop
 setInterval(() => {
+    // conditionals for birdfeeder being full
     
 }, 1000);// 1000 miliseconds = 1 second
 
@@ -111,7 +114,7 @@ function render(state){
     ${Buttons(State)}
     ${Messages(State)}
 `;
-    // incoming: CHRISTMAS TREE OF DOOM
+    
     for(const [ key, value ] of Object.entries(state.Clickers)){
         let button = document.querySelector(`#${key}`);
 
