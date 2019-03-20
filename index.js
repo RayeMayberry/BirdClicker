@@ -4,20 +4,17 @@ var root = document.querySelector('#root');
 
 var State = {
     'Resources' : {
-        'Birds' : {
-            amount: null
-        },
-        'Birdseed': {
-            amount: 100
-        },
-        'Trinkets' : {
-            amount: null
-        },
-        'Small Birdfeeder' : {
+        'Birds' : null,
+        'Birdseed': 100,
+        'Trinkets' : null,
+
+    },
+
+    Incrementors : {
+        'Birdfeeder-Small' : {
             amount: null,
             capacity: 0.0, //0-1 scale
-        }
-
+        } // increase capacity on click, 
     },
 
     Clickers: {
@@ -41,14 +38,15 @@ var State = {
         },
         'smallBirdfeeder': {
             'name': 'x1 Small Birdfeeder',
-            'buy': 'Small Birdfeeder',
+            'buy': 'Birdfeeder-Small',
             'buyCount': 1,
             'spend': 'Trinkets',
             'spendCount': 4,
             'successMessage': null,
             'errorMessage': 'Not enough trinkets'
-        }
+        },
     },
+
     'Alerts': [
         '<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>'
     ]
@@ -66,8 +64,8 @@ function Counters(state){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(state.Resources)){
-        if(value.amount !== null){
-            output += `<span id="${key}">${key}: ${value.amount}</span>`;
+        if(value !== null){
+            output += `<span id="${key}">${key}: ${value}</span>`;
         }
     }
 
@@ -81,7 +79,7 @@ function Buttons(state){
     var output = '<div id="clickers" class="column">';
 
     for(const [ key, value ] of Object.entries(state.Clickers)){
-        if(state.Resources[value.spend].amount >= value.spendCount){
+        if(state.Resources[value.spend] >= value.spendCount){
             output += `<span id="${key}" class="button">${value.name}</span>`;
         }
     }
@@ -120,9 +118,9 @@ function render(state){
 
         if(button){
             button.addEventListener('click', (event) => {
-                if(state.Resources[`${value.spend}`].amount >= value.spendCount){
-                    state.Resources[`${value.buy}`].amount += value.buyCount;
-                    state.Resources[`${value.spend}`].amount -= value.spendCount;
+                if(state.Resources[`${value.spend}`] >= value.spendCount){
+                    state.Resources[`${value.buy}`] += value.buyCount;
+                    state.Resources[`${value.spend}`] -= value.spendCount;
             
                     if(value.successMessage){
                         newMessage(`${value.successMessage}`);
