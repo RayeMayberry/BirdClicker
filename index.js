@@ -13,21 +13,20 @@ var State = {
         'Trinkets' : {
             amount: null
         },
-        'Small Birdfeeder' : {
+        'Birdfeeder' : {
             amount: null,
-            capacity: 0.0, //0-1 scale
+            capacity: 6
         }
 
     },
-
     Clickers: {
-        'scatterBirdseed': {
-            'name': 'Scatter some birdseed',
-            'buy': 'Trinkets', // resource to buy
+        'feedBirds': {
+            'name': 'Feed the birds',
+            'buy': 'Birds', // resource to buy
             'buyCount': 1, // how many?
             'spend': 'Birdseed', // resource to spend
             'spendCount': 10, // how many?
-            'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket. &#10024;',
+            'successMessage': 'A bird landed in the garden! &#128038;',
             'errorMessage': 'Not enough birdseed'
         },
         'buyBirdseed': {
@@ -39,12 +38,12 @@ var State = {
             'successMessage': null,
             'errorMessage': 'Not enough trinkets'
         },
-        'smallBirdfeeder': {
-            'name': 'x1 Small Birdfeeder',
-            'buy': 'Small Birdfeeder',
+        'buyBirdfeeder': {
+            'name': 'x1 Birdfeeder',
+            'buy': 'Birdfeeder',
             'buyCount': 1,
             'spend': 'Trinkets',
-            'spendCount': 4,
+            'spendCount': 6,
             'successMessage': null,
             'errorMessage': 'Not enough trinkets'
         }
@@ -66,6 +65,7 @@ function Counters(state){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(state.Resources)){
+        
         if(value.amount !== null){
             output += `<span id="${key}">${key}: ${value.amount}</span>`;
         }
@@ -102,28 +102,35 @@ function newMessage(text){
 
 // game loop
 setInterval(() => {
-    // conditionals for birdfeeder being full
+    if(State.Resources.Birdfeeder.amount && State.Resources.Birdfeeder.capacity > 0 ){
+        State.Resources.Birds.amount ++;
+        State.Resources.Birdfeeder.capacity --;
+    }
+    if(State.Resources.Birds.amount > 0){
+        State.Resources.Birds.amount --;
+        State.Resources.Trinkets.amount ++;
+    }
     
+    render(State)
 }, 1000);// 1000 miliseconds = 1 second
 
-// rendering HTML content
-function render(state){
-    root.innerHTML = `
-    ${Header()}
-    ${Counters(State)}
-    ${Buttons(State)}
-    ${Messages(State)}
-`;
-    
+
+function manageResources(state){
     for(const [ key, value ] of Object.entries(state.Clickers)){
         let button = document.querySelector(`#${key}`);
 
         if(button){
             button.addEventListener('click', (event) => {
-                if(state.Resources[`${value.spend}`].amount >= value.spendCount){
-                    state.Resources[`${value.buy}`].amount += value.buyCount;
-                    state.Resources[`${value.spend}`].amount -= value.spendCount;
+                if(state.Resources[value.spend].amount >= value.spendCount){
+                    state.Resources[value.buy].amount += value.buyCount;
+                    state.Resources[value.spend].amount -= value.spendCount;
             
+                    if(value.successMessage){
+                        newMessage(`${value.successMessage}`);
+                    }
+                }
+                else if(value.spend === undefined){
+                    state.Resources[value.buy].amount += value.buyCount;
                     if(value.successMessage){
                         newMessage(`${value.successMessage}`);
                     }
@@ -135,6 +142,18 @@ function render(state){
             });
         }
     }
+}
+
+// rendering HTML content
+function render(state){
+    root.innerHTML = `
+    ${Header()}
+    ${Counters(state)}
+    ${Buttons(state)}
+    ${Messages(state)}
+`;
+
+    manageResources(state);
 }
 render(State);
 
