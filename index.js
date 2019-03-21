@@ -1,7 +1,10 @@
+import State from './state.js'
+
 /* eslint-disable no-loop-func */
 
 var root = document.querySelector('#root');
 
+<<<<<<< HEAD
 var State = {
     'Resources' : {
 <<<<<<< HEAD
@@ -67,6 +70,8 @@ var State = {
     ]
 };
 
+=======
+>>>>>>> temp
 // Header component
 function Header(){
     return `
@@ -79,8 +84,14 @@ function Counters(state){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(state.Resources)){
+<<<<<<< HEAD
         if(value !== null){
             output += `<span id="${key}">${key}: ${value}</span>`;
+=======
+        
+        if(value.amount !== null){
+            output += `<span id="${key}">${key}: ${value.amount}</span>`;
+>>>>>>> temp
         }
     }
 
@@ -115,9 +126,22 @@ function newMessage(text){
 
 // game loop
 setInterval(() => {
+<<<<<<< HEAD
+=======
+    if(State.Resources.Birdfeeder.amount && State.Resources.Birdfeeder.capacity > 0 ){
+        State.Resources.Birds.amount ++;
+        State.Resources.Birdfeeder.capacity --;
+    }
+    if(State.Resources.Birds.amount > 0){
+        State.Resources.Birds.amount --;
+        State.Resources.Trinkets.amount ++;
+    }
+>>>>>>> temp
     
+    render(State)
 }, 1000);// 1000 miliseconds = 1 second
 
+<<<<<<< HEAD
 // rendering HTML content
 function render(state){
     root.innerHTML = `
@@ -127,15 +151,31 @@ function render(state){
     ${Messages(State)}
 `;
     // incoming: CHRISTMAS TREE OF DOOM
+=======
+
+function manageResources(state){
+>>>>>>> temp
     for(const [ key, value ] of Object.entries(state.Clickers)){
         let button = document.querySelector(`#${key}`);
 
         if(button){
             button.addEventListener('click', (event) => {
+<<<<<<< HEAD
                 if(state.Resources[`${value.spend}`] >= value.spendCount){
                     state.Resources[`${value.buy}`] += value.buyCount;
                     state.Resources[`${value.spend}`] -= value.spendCount;
+=======
+                if(state.Resources[value.spend].amount >= value.spendCount){
+                    state.Resources[value.buy].amount += value.buyCount;
+                    state.Resources[value.spend].amount -= value.spendCount;
+>>>>>>> temp
             
+                    if(value.successMessage){
+                        newMessage(`${value.successMessage}`);
+                    }
+                }
+                else if(value.spend === undefined){
+                    state.Resources[value.buy].amount += value.buyCount;
                     if(value.successMessage){
                         newMessage(`${value.successMessage}`);
                     }
@@ -147,6 +187,18 @@ function render(state){
             });
         }
     }
+}
+
+// rendering HTML content
+function render(state){
+    root.innerHTML = `
+    ${Header()}
+    ${Counters(state)}
+    ${Buttons(state)}
+    ${Messages(state)}
+`;
+
+    manageResources(state);
 }
 render(State);
 
