@@ -1,4 +1,8 @@
-import State from './state.js'
+import State from './state.js';
+import Header from './src/header.js';
+import Counters from './src/counters.js';
+import Buttons from './src/buttons.js';
+import Messages from './src/messages.js'
 
 /* eslint-disable no-loop-func */
 
