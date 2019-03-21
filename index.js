@@ -4,74 +4,6 @@ import State from './state.js'
 
 var root = document.querySelector('#root');
 
-<<<<<<< HEAD
-var State = {
-    'Resources' : {
-<<<<<<< HEAD
-        'Birds' : null,
-        'Birdseed': 100,
-        'Trinkets' : null,
-
-    },
-
-    Incrementors : {
-        'Birdfeeder-Small' : {
-            amount: null,
-            capacity: 0.0, //0-1 scale
-        } // increase capacity on click, 
-=======
-        'Birds' : {
-            amount: null
-        },
-        'Birdseed': {
-            amount: 100
-        },
-        'Trinkets' : {
-            amount: null
-        },
-        'Small Birdfeeder' : {
-            amount: null
-        }
-
->>>>>>> parent of 8e36113... add Resource for birdfeeder
-    },
-    Clickers: {
-        'scatterBirdseed': {
-            'name': 'Scatter some birdseed',
-            'buy': 'Trinkets', // resource to buy
-            'buyCount': 1, // how many?
-            'spend': 'Birdseed', // resource to spend
-            'spendCount': 10, // how many?
-            'successMessage': 'A bird ate some birdseed and flew away, leaving you 1 trinket. &#10024;',
-            'errorMessage': 'Not enough birdseed'
-        },
-        'buyBirdseed': {
-            'name': 'Buy more birdseed',
-            'buy': 'Birdseed',
-            'buyCount': 10,
-            'spend': 'Trinkets',
-            'spendCount': 1,
-            'successMessage': null,
-            'errorMessage': 'Not enough trinkets'
-        },
-        'smallBirdfeeder': {
-            'name': 'x1 Small Birdfeeder',
-            'buy': 'Birdfeeder-Small',
-            'buyCount': 1,
-            'spend': 'Trinkets',
-            'spendCount': 6,
-            'successMessage': null,
-            'errorMessage': 'Not enough trinkets'
-        },
-    },
-
-    'Alerts': [
-        '<span>Welcome to your Bird Clicker garden. Scatter some seed for the birds to begin.</span>'
-    ]
-};
-
-=======
->>>>>>> temp
 // Header component
 function Header(){
     return `
@@ -84,14 +16,9 @@ function Counters(state){
     var output = '<div id="resources" class="column">';
 
     for(const [ key, value ] of Object.entries(state.Resources)){
-<<<<<<< HEAD
-        if(value !== null){
-            output += `<span id="${key}">${key}: ${value}</span>`;
-=======
         
         if(value.amount !== null){
             output += `<span id="${key}">${key}: ${value.amount}</span>`;
->>>>>>> temp
         }
     }
 
@@ -126,8 +53,6 @@ function newMessage(text){
 
 // game loop
 setInterval(() => {
-<<<<<<< HEAD
-=======
     if(State.Resources.Birdfeeder.amount && State.Resources.Birdfeeder.capacity > 0 ){
         State.Resources.Birds.amount ++;
         State.Resources.Birdfeeder.capacity --;
@@ -136,39 +61,20 @@ setInterval(() => {
         State.Resources.Birds.amount --;
         State.Resources.Trinkets.amount ++;
     }
->>>>>>> temp
     
     render(State)
 }, 1000);// 1000 miliseconds = 1 second
 
-<<<<<<< HEAD
-// rendering HTML content
-function render(state){
-    root.innerHTML = `
-    ${Header()}
-    ${Counters(State)}
-    ${Buttons(State)}
-    ${Messages(State)}
-`;
-    // incoming: CHRISTMAS TREE OF DOOM
-=======
 
 function manageResources(state){
->>>>>>> temp
     for(const [ key, value ] of Object.entries(state.Clickers)){
         let button = document.querySelector(`#${key}`);
 
         if(button){
             button.addEventListener('click', (event) => {
-<<<<<<< HEAD
-                if(state.Resources[`${value.spend}`] >= value.spendCount){
-                    state.Resources[`${value.buy}`] += value.buyCount;
-                    state.Resources[`${value.spend}`] -= value.spendCount;
-=======
                 if(state.Resources[value.spend].amount >= value.spendCount){
                     state.Resources[value.buy].amount += value.buyCount;
                     state.Resources[value.spend].amount -= value.spendCount;
->>>>>>> temp
             
                     if(value.successMessage){
                         newMessage(`${value.successMessage}`);
