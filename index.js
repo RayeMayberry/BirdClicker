@@ -4,48 +4,6 @@ import State from './state.js'
 
 var root = document.querySelector('#root');
 
-// Header component
-function Header(){
-    return `
-        <header>Bird Clicker: a Game of Avian Iteration</header>
-    `;
-}
-
-// Counters component
-function Counters(state){
-    var output = '<div id="resources" class="column">';
-
-    for(const [ key, value ] of Object.entries(state.Resources)){
-        
-        if(value.amount !== null){
-            output += `<span id="${key}">${key}: ${value.amount}</span>`;
-        }
-    }
-
-    output += '</div>';
-
-    return output;
-}
-
-// Buttons component
-function Buttons(state){
-    var output = '<div id="clickers" class="column">';
-
-    for(const [ key, value ] of Object.entries(state.Clickers)){
-        if(state.Resources[value.spend] >= value.spendCount){
-            output += `<span id="${key}" class="button">${value.name}</span>`;
-        }
-    }
-    
-    output += '</div>';
-    
-    return output;
-}
-
-// Messages
-function Messages(state){
-    return `<div id="messages" class="column">${state.Alerts.join(' ')}</div>`;
-}
 // user alert message
 function newMessage(text){
     State.Alerts.push(`<span>${text}</span>`);
