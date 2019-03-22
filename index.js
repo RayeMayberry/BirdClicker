@@ -23,6 +23,10 @@ setInterval(() => {
         State.Resources.Birds.amount --;
         State.Resources.Trinkets.amount ++;
     }
+    if (State.Resources.Birdfeeder.capacity === 0) {
+        newMessage("Birdfeeder is empty");
+        State.Resources.Birdfeeder.capacity = null;
+    }
     
     render(State)
 }, 1000);// 1000 miliseconds = 1 second

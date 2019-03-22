@@ -11,7 +11,7 @@ export default {
         },
         'Birdfeeder' : {
             amount: null,
-            capacity: 6
+            capacity: 6 
         }
         
     },
@@ -42,6 +42,15 @@ export default {
             'spendCount': 6,
             'successMessage': null,
             'errorMessage': 'Not enough trinkets'
+        }, 
+        'fillBirdfeeder': {
+            'name': 'refill Birdfeeder',
+            'buy':'Birdfeeder.capacity',
+            'buyCount': 6,
+            'spend': 'Birdseed',
+            'spendCount': 6,
+            'successMessage': null,
+            'errorMessage': null
         }
     },
     'Alerts': [
