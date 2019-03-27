@@ -1,12 +1,13 @@
 export default function Counters(state){
     var output = '<div id="resources" class="column">';
 
-    for(const [ key, value ] of Object.entries(state.Resources)){
-        
-        if(value.amount !== null){
-            output += `<span id="${key}">${key}: ${value.amount}</span>`;
+    state.Resources.forEach(element => {
+        if(element.amount !== null){
+            output += `<span id="${element}">${element}: ${element.amount}</span>`;
         }
     }
+    );
+        
 
     output += '</div>';
 
