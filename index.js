@@ -20,10 +20,9 @@ var root = document.querySelector('#root');
 function render(state){
     root.innerHTML = `
     ${Header()}
-    ${Counters(state)}
     ${Buttons(state)}
+    ${Counters(state)}
 `;
-
 }
 render(State);
 

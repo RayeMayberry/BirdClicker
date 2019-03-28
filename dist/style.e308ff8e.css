@@ -16,7 +16,6 @@ header {
     grid-column-start: 1;
     grid-column-end: 4;
     font-family: 'Srisakdi', cursive;
-    font-size: 2em;
     text-align: center;
 }
 
@@ -34,12 +33,13 @@ header {
 span {
     display: inline-block;
     margin: 5px;
-    padding: 3px;
+    padding: 5px;
 }
 
 .button {
     background-color: grey;
     color: white;
+    border-radius: 15px;
 }
 .button:hover{
     cursor: pointer;
