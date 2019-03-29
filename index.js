@@ -1,4 +1,4 @@
-import State from './state.js';
+import * as State from './state';
 import Header from './src/header.js';
 import Counters from './src/counters.js';
 import Buttons from './src/buttons.js';
