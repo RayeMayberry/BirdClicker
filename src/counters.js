@@ -1,10 +1,7 @@
 export default function Counters(state){
     var output = '<div id="resources" class="column">';
 
-    for(const [key, value] in state.resources){
-        // if(value !== null){
-            
-        // }
+    for(const [key, value] of Object.entries(state.Resources)){
         output += `<span id="${key}">${key}: ${value}</span>`;
     }
         
