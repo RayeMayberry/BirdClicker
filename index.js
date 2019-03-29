@@ -15,6 +15,13 @@ var root = document.querySelector('#root');
 //     State.Alerts.push(`<span>${text}</span>`);
 // }
 
+function handleButtons(event){
+    let buttonID = event.target.id;
+
+    console.log('i was clicked!');
+    console.log(buttonID);
+
+}
 
 // rendering HTML content
 function render(state){
@@ -22,7 +29,15 @@ function render(state){
     ${Header()}
     ${Buttons(state)}
     ${Counters(state)}
-`;
+    `;
+
+    let buttons = document.querySelectorAll('.button');
+    buttons.forEach(
+        (element)=>{
+            element.addEventListener('click', handleButtons)
+        }
+    )
+
 }
 render(State);
 
