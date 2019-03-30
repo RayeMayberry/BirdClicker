@@ -18,8 +18,10 @@ var root = document.querySelector('#root');
 function handleButtons(event){
     let buttonID = event.target.id;
 
-    console.log('i was clicked!');
-    console.log(buttonID);
+    // pass buttonID into state and apply the useButton() function
+    State.Buttons[buttonID].useButton();
+
+    render(State);
 
 }
 

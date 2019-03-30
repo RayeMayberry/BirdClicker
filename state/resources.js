@@ -1,5 +1,5 @@
 export default {
-    'birds': 17,
+    'birds': null,
     'trinkets': null,
     'birdfeeders': null
 }

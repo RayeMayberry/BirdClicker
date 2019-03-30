@@ -1,3 +1,5 @@
+import * as State from './';
+
 class button {
     constructor(label, buy, ratio, cost){
         this.label = label; // what the button says
@@ -8,11 +10,14 @@ class button {
     }
     useButton(){
         State.Resources[this.buy] += this.ratio;
-        State.Resources[this.cost] --;
+        if (this.cost){
+            State.Resources[this.cost] --;
+        }
     }
 }
 
-var feedBirds = new button('feed the birds', 'birds', 1, null);
+
+var feedBirds = new button('feed the birds', 'birds', 1);
 
 export default {
     'feedBirds' : feedBirds
