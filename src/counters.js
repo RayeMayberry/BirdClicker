@@ -1,4 +1,4 @@
-export default function Counters(state){
+export default function (state){
     var output = '<div id="resources" class="column">';
 
     for(const [key, value] of Object.entries(state.Resources)){
