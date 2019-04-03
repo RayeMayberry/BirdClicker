@@ -43,6 +43,7 @@ export default function render(state){
             element.addEventListener('click', handleButtons)
         }
     )
+
 }
 render(State);
 

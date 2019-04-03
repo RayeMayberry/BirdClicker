@@ -1,3 +1,8 @@
 export default function (state){
-    return `<div id="messages" class="column">${state.Messages.join(' ')}</div>`;
+    let output = '<div id="messages" class="column">';
+    state.Messages.forEach(
+        (element)=>{output += `<span>${element}</span>`}
+    );
+    output += '</div>';
+    return output;
 }
