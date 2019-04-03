@@ -9,29 +9,43 @@ body {
 }
 
 #root {
-    display: grid;
-    grid-template-columns: 1fr 1fr 3fr;
-    grid-template-rows: auto 1fr;
-    width: 80vw;
     margin: 10px;
     padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto auto 1fr;
+    width: 80vw;
+
     background-color: rosybrown;
     border: 2px solid black;
     border-radius: 15px;
 }
 
 
-header, #counters, #messages, #buttons {
+header, nav, #counters, #messages, .button {
     margin: 5px;
+    padding: 5px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
-header {
+header, nav {
     grid-column-start: 1;
     grid-column-end: 4;
-    font-family: 'Srisakdi', cursive;
     text-align: center;
+}
+
+header {
+    font-family: 'Srisakdi', cursive;
+}
+
+nav {
+    display:flex;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
 }
 
 .column {
@@ -43,32 +57,36 @@ header {
 #messages {
     flex-direction: column-reverse;
     justify-content: flex-end;
+    align-self: stretch;
+    overflow-y: scroll;
 }
 
 span {
     display: inline-block;
     margin: 5px;
-    padding: 5px;
 }
 
 .button {
     background-color: lightslategray;
-    border-radius: 15px;
 }
 .button:hover{
     cursor: pointer;
 }
 
 @media(orientation: portrait){
-    body {
-        align-items: flex-start;
-    }
+    
     #root{
         grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto 1fr;
+        overflow: hidden;
     }
 
     #header, #messages{
         grid-column-start: 1;
         grid-column-end: 3;
+    }
+
+    #messages{
+        align-self: stretch;
     }
 }

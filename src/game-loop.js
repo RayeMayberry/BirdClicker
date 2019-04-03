@@ -6,6 +6,7 @@ export default function (state){
         if(state.Resources.birds >= 1){
         state.Resources.birds --;
         state.Resources.trinkets ++;
+        state.Messages.push('A bird left you +1 trinket.');
         }
 
         render(state);
