@@ -44,6 +44,8 @@ header {
 #messages {
     flex-direction: column-reverse;
     justify-content: flex-end;
+    align-self: stretch;
+    overflow-y: scroll;
 }
 
 span {
@@ -60,16 +62,20 @@ span {
 }
 
 @media(orientation: portrait){
-    body{
-        align-items: flex-start;
-    }
+    
     #root{
         grid-template-columns: auto auto;
+        grid-template-rows: auto auto 1fr;
+        overflow: hidden;
     }
 
     #header, #messages{
         grid-column-start: 1;
         grid-column-end: 3;
+    }
+
+    #messages{
+        align-self: stretch;
     }
 }
 
