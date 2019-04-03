@@ -32,8 +32,8 @@ gameLoop(State);
 export default function render(state){
     root.innerHTML = `
     ${Header()}
-    ${Buttons(state)}
     ${Counters(state)}
+    ${Buttons(state)}
     ${Messages(state)}
     `;
 
