@@ -1,6 +1,7 @@
 body {
-    background-color: thistle;
     font-family: 'Courier New', Courier, monospace;
+    background-image: url('./img/bird-bg.jpg');
+    background-repeat: repeat;
 }
 
 #root {
@@ -9,7 +10,18 @@ body {
     grid-template-rows: auto 1fr;
     width: 90vw;
     margin: 0 auto;
+    padding: 10px;
     max-height: 100vh;
+}
+
+header, #counters, #messages, .button {
+    background-color: rgb(185, 134, 185);
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+header, .column {
+    margin: 5px;
 }
 
 header {
@@ -38,8 +50,6 @@ span {
 
 .button {
     background-color: grey;
-    color: white;
-    border-radius: 15px;
 }
 .button:hover{
     cursor: pointer;

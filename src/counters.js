@@ -1,5 +1,5 @@
 export default function (state){
-    var output = '<div id="resources" class="column">';
+    var output = '<div id="counters" class="column">';
 
     for(const [key, value] of Object.entries(state.Resources)){
         if(value !== null){
