@@ -9,21 +9,22 @@ body {
 }
 
 #root {
-    margin: 10px;
-    padding: 5px;
     display: grid;
     grid-template-columns: 1fr 1fr 3fr;
     grid-template-rows: auto 1fr;
     width: 80vw;
-
-    background-color: rgb(185, 134, 185);
+    margin: 10px;
+    padding: 5px;
+    background-color: rosybrown;
     border: 2px solid black;
     border-radius: 15px;
 }
 
 
-header, #counters, #messages {
+header, #counters, #messages, #buttons {
     margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 header {
@@ -51,8 +52,7 @@ span {
 }
 
 .button {
-    background-color: slategrey;
-    border: 2px solid black;
+    background-color: lightslategray;
     border-radius: 15px;
 }
 .button:hover{
@@ -60,6 +60,9 @@ span {
 }
 
 @media(orientation: portrait){
+    body {
+        align-items: flex-start;
+    }
     #root{
         grid-template-columns: auto auto;
     }
