@@ -16,14 +16,16 @@ body {
     grid-template-rows: auto 1fr;
     width: 80vw;
 
-    background-color: rgb(185, 134, 185);
+    background-color: rosybrown;
     border: 2px solid black;
     border-radius: 15px;
 }
 
 
-header, #counters, #messages {
+header, #counters, #messages, .button {
     margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 header {
@@ -51,9 +53,7 @@ span {
 }
 
 .button {
-    background-color: slategrey;
-    border: 2px solid black;
-    border-radius: 15px;
+    background-color: lightslategray;
 }
 .button:hover{
     cursor: pointer;
