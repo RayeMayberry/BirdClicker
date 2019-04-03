@@ -1,29 +1,42 @@
 body {
-    background-color: thistle;
-    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('/bird-bg.8ef45329.jpg');
+    background-repeat: repeat;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14pt;
 }
 
 #root {
+    margin: 10px;
+    padding: 5px;
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: 1fr 1fr 3fr;
     grid-template-rows: auto 1fr;
-    width: 90vw;
-    margin: 0 auto;
-    height: 100vh;
+    width: 80vw;
+
+    background-color: rgb(185, 134, 185);
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+
+header, #counters, #messages {
+    margin: 5px;
 }
 
 header {
     grid-column-start: 1;
     grid-column-end: 4;
     font-family: 'Srisakdi', cursive;
-    font-size: 2em;
     text-align: center;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    font-size: 12pt;
+    align-self: flex-start;
 }
 
 #messages {
@@ -34,12 +47,13 @@ header {
 span {
     display: inline-block;
     margin: 5px;
-    padding: 3px;
+    padding: 5px;
 }
 
 .button {
-    background-color: grey;
-    color: white;
+    background-color: slategrey;
+    border: 2px solid black;
+    border-radius: 15px;
 }
 .button:hover{
     cursor: pointer;
@@ -55,3 +69,5 @@ span {
         grid-column-end: 3;
     }
 }
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
