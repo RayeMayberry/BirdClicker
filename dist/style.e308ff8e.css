@@ -60,6 +60,9 @@ span {
 }
 
 @media(orientation: portrait){
+    body{
+        align-items: flex-start;
+    }
     #root{
         grid-template-columns: auto auto;
     }
