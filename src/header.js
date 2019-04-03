@@ -1,7 +1,7 @@
 export default function Header(){
     return `
         <header>
-            <h1>Bird Clicker: a Game of Avian Iteration</h1>
+            <h1>Bird Clicker: a Game of Avian Incrememtation</h1>
         </header>
         <nav>
             <span><a href="http://rayemayberry.netlify.com/projects">More Projects</a></span>
