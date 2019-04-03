@@ -19,9 +19,10 @@
   "homepage": "https://github.com/nascenticity/savvy-final-project#readme",
   "devDependencies": {
     "eslint": "^5.15.0",
-    "parcel-bundler": "^1.12.2"
+    "parcel-bundler": "^1.12.3"
   },
   "dependencies": {
-    "parcel": "^1.12.2"
+    "lodash": "^4.17.11",
+    "parcel": "^1.12.3"
   }
 }

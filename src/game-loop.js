@@ -12,13 +12,8 @@ export default function (state){
 
     }, 1000); 
     // birdfeeders attract birds without clicking
-    // if(state.Resources.birdfeeders!== null){
-    //     let ratio = Math.pow(5, state.Resources.birdfeeders);
-    //     setInterval(()=>{
-    //         state.Resources.birds ++;
-
-    //         render(state);
-
-    //     }, ratio * 1000);
-    // }
+    setInterval(()=>{
+        state.Resources.birds += state.Resources.birdfeeders;
+        render(state);
+    }, 10000);
 }
