@@ -1,7 +1,6 @@
 import render from '../index.js';
 
-export default function (state){
-    // every 1 second a bird leaves
+function leaveTrinkets(state){
     setInterval(()=>{
         if(state.Resources.birds >= 1){
         state.Resources.birds --;
@@ -11,9 +10,20 @@ export default function (state){
         render(state);
 
     }, 1000); 
-    // birdfeeders attract birds without clicking
+}
+
+function attractBirds(state){
+    let ratio = state.Resources.birds + 1;
+
     setInterval(()=>{
-        state.Resources.birds += state.Resources.birdfeeders;
+        state.Resources.birds ++;
         render(state);
-    }, 10000);
+    }, 10000 / ratio);
+}
+
+export default function (state){
+    // every 1 second a bird leaves
+    leaveTrinkets(state);
+    // birdfeeders attract birds without clicking
+    attractBirds(state);
 }
