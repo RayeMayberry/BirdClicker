@@ -1,5 +1,6 @@
 import * as State from './state';
 import Header from './src/header.js';
+import Timer from './src/timer.js';
 import Counters from './src/counters.js';
 import Buttons from './src/buttons.js';
 import Messages from './src/messages.js'
@@ -32,6 +33,7 @@ gameLoop(State);
 export default function render(state){
     root.innerHTML = `
     ${Header()}
+    ${Timer()}
     ${Counters(state)}
     ${Buttons(state)}
     ${Messages(state)}
