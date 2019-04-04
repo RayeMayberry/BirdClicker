@@ -28,12 +28,12 @@ class button {
     }
 }
 
-
 var feedBirds = new button('feed the birds', 'birds', '', 0);
-
 var buyBirdfeeder = new button('buy birdfeeder', 'birdfeeders', 'trinkets', 10 );
+var buyBirdbath = new button('buy bird bath', 'birdbaths', 'trinkets',10);
 
 export default {
     'feedBirds' : feedBirds,
-    'buyBirdfeeder': buyBirdfeeder
+    'buyBirdfeeder': buyBirdfeeder,
+    'buyBirdbath': buyBirdbath
 }
