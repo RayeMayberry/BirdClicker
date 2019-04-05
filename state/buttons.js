@@ -23,7 +23,7 @@ class button {
             State.Resources[this.buy] ++;
         }
         else{
-            State.Messages.push(`Not enough ${this.cost}: (${State.Resources[this.cost]}/${this.ratio})`)
+            State.Messages.push(`Not enough ${this.cost} to ${this.label}: (${State.Resources[this.cost]}/${this.ratio})`)
         }
     }
 }
