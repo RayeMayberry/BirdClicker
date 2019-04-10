@@ -5,17 +5,13 @@ import Counters from './src/counters.js';
 import Buttons from './src/buttons.js';
 import Messages from './src/messages.js'
 import gameLoop from './src/game-loop.js'
+import Animation from './src/animation.js'
 
 /* eslint-disable no-loop-func */
 
 console.log(State);
 
 var root = document.querySelector('#root');
-
-// user alert message
-function newMessage(text){
-    State.Alerts.push(`<span>${text}</span>`);
-}
 
 function handleButtons(event){
     let buttonID = event.target.id;
@@ -34,6 +30,7 @@ export default function render(state){
     root.innerHTML = `
     ${Header()}
     ${Timer()}
+    ${Animation(state)}
     ${Counters(state)}
     ${Buttons(state)}
     ${Messages(state)}
