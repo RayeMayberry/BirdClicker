@@ -22,6 +22,8 @@ body {
 
 header {
     font-family: 'Srisakdi', cursive;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 header, nav, #counters, #messages{
@@ -46,6 +48,7 @@ canvas {
     background-color: #ffffff;
     grid-column-start: 2;
     grid-column-end: 4;
+    justify-self: stretch;
 }
 
 .column {
@@ -67,7 +70,7 @@ span {
         overflow: hidden;
     }
 
-    #header, #messages{
+    header, #messages{
         grid-column-start: 1;
         grid-column-end: 3;
     }

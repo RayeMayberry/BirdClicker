@@ -1,6 +1,14 @@
 var canvas = document.createElement('canvas');
 root.appendChild(canvas);
-canvas.width = 32 * 12;
-canvas. height = 32 * 8;
+canvas.height = canvas.width * 2/3;
 
-export default canvas;
+var ctx = canvas.getContext('2d');
+var ctxBg = canvas.cloneNode().getContext('2d');
+var ctxMenu = canvas.cloneNode().getContext('2d');
+
+export default {
+    'canvas':canvas,
+    'ctx': ctx,
+    'ctxBg': ctxBg,
+    'ctxMenu':ctxMenu
+}

@@ -1,5 +1,5 @@
 var header = document.createElement('header');
 root.appendChild(header);
-header.innerHTML = "<h1>BirdClicker: A Game of Avian Incrementation</h1>"
+header.innerHTML = "BirdClicker: A Game of Avian Incrementation"
 
 export default header;
