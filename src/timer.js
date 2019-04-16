@@ -1,3 +1,5 @@
+// should refactor this using Date.now()
+
 var hours = 0;
 var minutes = 0;
 var seconds = 0;

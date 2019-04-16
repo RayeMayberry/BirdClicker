@@ -2,10 +2,9 @@ import * as State from './state';
 import Header from './src/header.js';
 import Timer from './src/timer.js';
 import Counters from './src/counters.js';
-import Buttons from './src/buttons.js';
 import Messages from './src/messages.js'
 import gameLoop from './src/game-loop.js'
-import Animation from './src/animation.js'
+import Canvas from './src/canvas.js'
 
 /* eslint-disable no-loop-func */
 
@@ -26,22 +25,8 @@ function handleButtons(event){
 gameLoop(State);
 
 // rendering HTML content
-export default function render(state){
-    root.innerHTML = `
-    ${Header()}
-    ${Timer()}
-    ${Animation(state)}
-    ${Counters(state)}
-    ${Buttons(state)}
-    ${Messages(state)}
-    `;
-
-    let buttons = document.querySelectorAll('.button');
-    buttons.forEach(
-        (element)=>{
-            element.addEventListener('click', handleButtons)
-        }
-    )
+export default function render(){
+    
 
 }
 render(State);

@@ -7,18 +7,21 @@ body {
     font-family: 'Fira Sans', sans-serif;
     font-size: 14pt;
 }
-
 #root {
     margin: 10px;
     padding: 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 2fr;
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-columns: 1fr 1fr  2fr;
+    grid-template-rows: auto 1fr;
     width: 80vw;
-
+    
     background-color: rgba(188, 143, 143, 0.9);
     border: 2px solid black;
     border-radius: 15px;
+}
+
+header {
+    font-family: 'Srisakdi', cursive;
 }
 
 header, nav, #counters, #messages{
@@ -26,7 +29,7 @@ header, nav, #counters, #messages{
 }
 
 
-header, nav, #counters, #messages, .button {
+header, nav, #counters, #messages, .button, canvas{
     margin: 5px;
     padding: 5px;
     border: 1px solid black;
@@ -39,25 +42,10 @@ header, nav, #timer {
     text-align: center;
 }
 
-header {
-    font-family: 'Srisakdi', cursive;
-}
-
-nav {
-    display:flex;
-    justify-content: center;
-}
-
-nav a {
-    text-decoration: none;
-}
-
 canvas {
     background-color: #ffffff;
-    grid-row-start: 1;
-    grid-row-end: 5;
-    grid-column-start: 4;
-    grid-column-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 4;
 }
 
 .column {
@@ -66,23 +54,9 @@ canvas {
     align-self: flex-start;
 }
 
-#messages {
-    flex-direction: column-reverse;
-    justify-content: flex-end;
-    align-self: stretch;
-    overflow-y: scroll;
-}
-
 span {
     display: inline-block;
     margin: 5px;
-}
-
-.button {
-    background-color: lightslategray;
-}
-.button:hover{
-    cursor: pointer;
 }
 
 @media(orientation: portrait){
@@ -101,4 +75,4 @@ span {
     #messages{
         align-self: stretch;
     }
-}
+} 
