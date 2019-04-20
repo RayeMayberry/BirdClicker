@@ -8,7 +8,6 @@ import * as Img from './img';
 
 var root = document.querySelector('#root');
 
-
 var blackBirdSpriteSheet = new Image();
 blackBirdSpriteSheet.src = Img.blackBirdSpriteSheet;
 

@@ -1,4 +1,4 @@
-import * as State from './';
+import * as State from '../state';
 
 class button {
     constructor(label, buy, cost, ratio){
