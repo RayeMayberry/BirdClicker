@@ -4,7 +4,7 @@ import Overworld from './assets/overworld_tileset_grass.png';
 var config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 600,
+    height: 640,
     parent: 'root',
     scene: {
         preload: preload,
