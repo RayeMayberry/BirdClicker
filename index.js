@@ -1,51 +1,26 @@
-import * as State from './state';
-import Header from './src/header.js';
-import Timer from './src/timer.js';
-import Counters from './src/counters.js';
-import Buttons from './src/buttons.js';
-import Messages from './src/messages.js';
-import gameLoop from './src/game-loop.js';
+import Phaser from 'phaser';
 
-/* eslint-disable no-loop-func */
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
 
-console.log(State);
+var game = new Phaser.Game(config);
 
-const root = document.querySelector('#root');
-
-// user alert message
-function newMessage(text){
-    State.Alerts.push(`<span>${text}</span>`);
+function preload ()
+{
 }
 
-function handleButtons(event){
-    let buttonID = event.target.id;
-
-    // pass buttonID into state and apply the useButton() function
-    State.Buttons[buttonID].useButton();
-
-    render(State);
-
+function create ()
+{
 }
 
-gameLoop(State);
-
-// rendering HTML content
-export default function render(State){
-    root.innerHTML = `
-    ${Header()}
-    ${Timer()}
-    ${Counters(state)}
-    ${Buttons(state)}
-    ${Messages(state)}
-    `;
-
-    let buttons = document.querySelectorAll('.button');
-    buttons.forEach(
-        (element)=>{
-            element.addEventListener('click', handleButtons)
-        }
-    )
-
+function update ()
+{
 }
-render(State);
-
