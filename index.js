@@ -3,14 +3,14 @@ import Header from './src/header.js';
 import Timer from './src/timer.js';
 import Counters from './src/counters.js';
 import Buttons from './src/buttons.js';
-import Messages from './src/messages.js'
-import gameLoop from './src/game-loop.js'
+import Messages from './src/messages.js';
+import gameLoop from './src/game-loop.js';
 
 /* eslint-disable no-loop-func */
 
 console.log(State);
 
-var root = document.querySelector('#root');
+const root = document.querySelector('#root');
 
 // user alert message
 function newMessage(text){
@@ -30,7 +30,7 @@ function handleButtons(event){
 gameLoop(State);
 
 // rendering HTML content
-export default function render(state){
+export default function render(State){
     root.innerHTML = `
     ${Header()}
     ${Timer()}
