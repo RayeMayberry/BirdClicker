@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import Overworld from './assets/overworld_tileset_grass.png';
+import Grass from './assets/grass_LPC.png';
+import Garden from './assets/garden.json';
 
 var config = {
     type: Phaser.AUTO,
@@ -18,27 +19,21 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     // assets go here!
-    this.load.image('overworld', Overworld);
-
+    this.load.image("tiles", Grass)
+    this.load.timemapTiledJSON("map", Garden)
 }
 
 function create ()
 {
-    // code for bg tiles
-    const garden = [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-    ];
-    const map = this.make.tilemap({ data: garden, tileWidth: 16, tileHeight: 16 });
-    const tiles = map.addTilesetImage("overworld");
-    const layer = map.createStaticLayer(0, tiles, 0, 0);
+    // stuff gets rendered here!
+    const map = this.make.tilemap({key: "map"});
+    const tileset = map.addTilesetImage(Garden, "tiles");
+
+    const layer = map.createStaticLayer(0, tileset, 0,0);
+    
 }
 
 function update (time, delta)
 {
+    // animations happen here
 }
