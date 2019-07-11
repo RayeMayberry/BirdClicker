@@ -5,7 +5,7 @@ import Garden from './assets/garden.json';
 var config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 640,
+    height: 600,
     parent: 'root',
     scene: {
         preload: preload,
