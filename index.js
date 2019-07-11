@@ -6,7 +6,6 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    parent: 'root',
     scene: {
         preload: preload,
         create: create,
@@ -33,7 +32,7 @@ function create ()
     
 }
 
-function update (time, delta)
+function update ()
 {
     // animations happen here
 }
