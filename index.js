@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Garden from  './assets/garden.png';
 
 var config = {
     type: Phaser.AUTO,
@@ -17,18 +18,13 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     // assets go here!
-    this.load.image("tiles", './assets/grass_LPC.png')
-    this.load.tilemapTiledJSON("map", './assets/garden.json')
+    this.load.image("garden",Garden);
 }
 
 function create ()
 {
     // stuff gets rendered here!
-    const map = this.make.tilemap({key: "map"});
-    const tileset = map.addTilesetImage('./assets/garden.json', "tiles");
-
-    const layer = map.createStaticLayer(0, tileset, 0,0);
-    
+    this.add.image(400,400, "garden");
 }
 
 function update ()
