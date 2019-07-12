@@ -6,6 +6,7 @@ var config = {
     width: 800,
     height: 800,
     parent: 'root',
+    backgroundColor: '#2f8136',
     scene: {
         preload: preload,
         create: create,
