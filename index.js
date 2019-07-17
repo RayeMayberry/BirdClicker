@@ -5,9 +5,9 @@ import Grass from './assets/grass_LPC.png';
 var config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 800,
+    height: 600,
     parent: 'root',
-    backgroundColor: '#2f8136',
+    backgroundColor: '#41b54c',
     scene: {
         preload: preload,
         create: create,
@@ -26,10 +26,11 @@ function preload ()
 
 function create ()
 {
-    // stuff gets rendered here!
-    const map = this.make.tilemap({key: "map"});
-    const tileset = map.addTilesetImage("grass_LPC", "tiles");
-    const grassLayer = map.createStaticLayer("grass", tileset, 0, 0);
+    const title = this.add.text(0,0, "Bird Clicker: A Game of Avian Incrementation", {fontFamily: "Fira Sans", fontSize: "32px"});
+
+    const map = this.make.tilemap({key: "map"}); // create a tilemap from the json file
+    const tileset = map.addTilesetImage("grass_LPC", "tiles"); // point map to tileset image file
+    const grassLayer = map.createStaticLayer("grass", tileset, 0, 120); // render layer with tilemap and tileset data
 }
 
 function update ()
