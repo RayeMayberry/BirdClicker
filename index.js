@@ -10,7 +10,7 @@ import gameLoop from './src/game-loop.js';
 
 console.log(State);
 
-const root = document.querySelector('#root');
+var root = document.querySelector('#root');
 
 // user alert message
 function newMessage(text){
@@ -30,7 +30,7 @@ function handleButtons(event){
 gameLoop(State);
 
 // rendering HTML content
-export default function render(State){
+export default function render(state){
     root.innerHTML = `
     ${Header()}
     ${Timer()}
